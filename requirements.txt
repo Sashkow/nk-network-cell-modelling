@@ -11,4 +11,3 @@ wsgiref==0.1.2
 
 pygraphviz==1.2
 
--e hg+https://bitbucket.org/etienned/pil-2009-raclette/#egg=PIL
