@@ -1,9 +1,14 @@
 argparse==1.2.1
 
-Django==1.7
-dj-database-url==0.3.0
+Django==1.6.5
+dj-database-urlу==0.3.0
 dj-static==0.0.6
+django-toolbelt==0.0.1
 gunicorn==19.1.1
-psycopg2==2.5.1
-static==0.4
+psycopg2==2.5.3
+static3==0.5.1
 wsgiref==0.1.2
+
+pygraphviz==1.2
+
+-e hg+https://bitbucket.org/etienned/pil-2009-raclette/#egg=PIL
