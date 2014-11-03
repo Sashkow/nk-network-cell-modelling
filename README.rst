@@ -7,8 +7,8 @@ ExplanationPictures folder contains images that support the following text.
 .. image:: https://github.com/Sashkow/nk-network-cell-modelling/blob/master/ExplanationPictures/01.jpg
    :name: Two Scoops Logo
    :align: center
-   :width: 100
-   :alt: Two Scoops of Django
+   :width: 10
+   :alt: cell image
    :target: https://github.com/Sashkow/nk-network-cell-modelling/blob/master/ExplanationPictures/01.jpg
 01. There are many organells in a living cell. But we are interested particualry in the nucleus (and partially with mitochondria)
 
