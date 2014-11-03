@@ -36,7 +36,7 @@ ExplanationPictures folder contains images that support the following text.
 
 07. Let`s look at one of genes subgroup. They gather together and discuss their states which were taken on the previous meeting. (Yes, we assume that genes change their states synchroniously within descrete (certain) moments in time(steps)).
 
-.. image:: https://raw.githubusercontent.com/Sashkow/nk-network-cell-modelling/master/ExplanationPictures/07jpg
+.. image:: https://raw.githubusercontent.com/Sashkow/nk-network-cell-modelling/master/ExplanationPictures/07.jpg
    :align: center
 
 08. Having found out what the neighbours' states are genes take decision whether to change state or stay constant for this step. Their decisions are based on logical functions which take others' genes states as inputs and gives gene's new state as output. 
