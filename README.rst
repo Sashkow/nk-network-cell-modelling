@@ -4,7 +4,11 @@ This software models life cell genetic regulation using Kauffman`s NK-automata. 
 
 ExplanationPictures folder contains images that support the following text.
 
-    ![alt tag](https://github.com/Sashkow/nk-network-cell-modelling/blob/master/ExplanationPictures/01.jpg)
+.. image:: https://github.com/Sashkow/nk-network-cell-modelling/blob/master/ExplanationPictures/01.jpg
+   :name: Two Scoops Logo
+   :align: center
+   :alt: Two Scoops of Django
+   :target: https://github.com/Sashkow/nk-network-cell-modelling/blob/master/ExplanationPictures/01.jpg
 01. There are many organells in a living cell. But we are interested particualry in the nucleus (and partially with mitochondria)
 
 02. There are chromosomes floating in nucleus
