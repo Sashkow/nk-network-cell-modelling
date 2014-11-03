@@ -8,6 +8,7 @@ ExplanationPictures folder contains images that support the following text.
 
 .. image:: https://github.com/Sashkow/nk-network-cell-modelling/blob/master/ExplanationPictures/01.jpg
    :align: center
+   :scale: 50 %
    
    
 
