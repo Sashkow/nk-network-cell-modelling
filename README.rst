@@ -41,7 +41,6 @@ ExplanationPictures folder contains images that support the following text.
 
 08. Having found out what the neighbours' states are genes take decision whether to change state or stay constant for this step. Their decisions are based on logical functions which take others' genes states as inputs and gives gene's new state as output. 
 
-===========================
 
 .. image:: https://raw.githubusercontent.com/Sashkow/nk-network-cell-modelling/master/ExplanationPictures/08.jpg
    :align: center
