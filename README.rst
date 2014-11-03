@@ -79,11 +79,11 @@ This is first but not the only wonderful implication of the model. There are oth
 This piece of software helps to explore dependence between genes' structure and the cell's behavior. E.g.how many cycles a cell can have, what makes them large or small... ect.
 
 USAGE
-The program takes two parameters: N and K.
+
+The program takes two parameters: N and K
 
 On hitting submit button the program will draw a random cell
 	- graph of links among Genes
 	- graph of all cell states
 	- graph of only those states which in cycle 
 	
- 
