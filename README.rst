@@ -5,7 +5,9 @@ This software models life cell genetic regulation using Kauffman`s NK-automata. 
 ExplanationPictures folder contains images that support the following text.
 
 01. There are many organells in a living cell. But we are interested particualry in the nucleus (and partially with mitochondria)
-|01|
+..image:: https://github.com/Sashkow/nk-network-cell-modelling/blob/master/ExplanationPictures/01.jpg
+   :align: center
+
 
 02. There are chromosomes floating in nucleus
 
@@ -45,9 +47,4 @@ On hitting submit button the program will draw a random cell
 	- graph of all cell states
 	- graph of only those states which in cycle 
 	
-..|01| image:: https://github.com/Sashkow/nk-network-cell-modelling/blob/master/ExplanationPictures/01.jpg
-   :name: Two Scoops Logo
-   :align: center
-   :alt: cell image
-   :target: https://github.com/Sashkow/nk-network-cell-modelling/blob/master/ExplanationPictures/01.jpg
-
+ 
