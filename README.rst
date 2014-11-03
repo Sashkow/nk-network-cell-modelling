@@ -10,7 +10,7 @@ ExplanationPictures folder contains images that support the following text.
    :align: center
    :width: 663px
    :height: 960px
-   :scale: 50%
+   :scale: 10 %
    
    
 
