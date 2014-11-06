@@ -26,7 +26,7 @@ class DrawGraph(object):
                     
         A.layout(prog='dot')
      
-        savePath=currentFolder+'/'+"tempGeneLinksGraph.png"
+        savePath=currentFolder+'/'+"tempGeneLinksGraph.svg"
         print "Saving bool function links graph to file..."
           
         #save temporaryly
@@ -56,9 +56,9 @@ class DrawGraph(object):
 #             else:
 #                 A.add_edge(item,d[item][0],dir='forward',arrowhead='normal',label=d[item][1])
         A.layout(prog='neato')
-        #savePath=currentFolder+'/'+"tempStatesGraph.png"
+        #savePath=currentFolder+'/'+"tempStatesGraph.svg"
         print "Saving graph to file..."
-        A.draw(os.path.join(saveFolderPath,"tempStatesGraph.png"))
+        A.draw(os.path.join(saveFolderPath,"tempStatesGraph.svg"))
         print "The graph has been saved at", saveFolderPath
         
         
@@ -83,7 +83,7 @@ class DrawGraph(object):
             
         A.layout(prog='circo')
         
-        savePath=currentFolder+'/'+"tempSiplifiedStatesGraph.png"
+        savePath=currentFolder+'/'+"tempSiplifiedStatesGraph.svg"
         print "Saving graph to file..."
         
         A.draw(savePath)
@@ -110,7 +110,7 @@ def drawTriangles():
   A.add_edge('6','4', dir='forward',arrowhead='normal', style='bold')
   
   A.layout(prog='circo')
-  A.draw('tr.png')
+  A.draw('tr.svg')
  
 
 def drawDifferentNodes():
@@ -124,7 +124,7 @@ def drawDifferentNodes():
   A.add_edge('2','3', dir='forward',arrowhead='normal')
   
   A.layout(prog='circo')
-  A.draw('tr2.png')
+  A.draw('tr2.svg')
 """
 drawDifferentNodes()
 # set some default node attributes
@@ -158,7 +158,7 @@ A.add_edge('4','nill4')
 A.add_edge('5','nill5')
 
 A.layout(prog='dot')
-A.draw('star.png')
+A.draw('star.svg')
 
 A.delete_edge('5','nill5')
 A.delete_node('nill5')
