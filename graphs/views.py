@@ -16,11 +16,18 @@ import os
 
 import random 
 
+import svgwrite
+import xml.etree.ElementTree as ET
+
+
+
+
+
 
 def index(request):
-	print "in graphs/views/index"
 	template = loader.get_template('graphs/index.html')
-	context = RequestContext(request, {})
+	context = RequestContext(request, {
+		})
 
 	return HttpResponse(template.render(context))
 
@@ -30,34 +37,45 @@ def message(request):
 
 
 def build(request):
-
+	global nkAutomata
+	
 	N = int(request.POST['nValue'])
 	K = int(request.POST['kValue'])
-	
-
-	nkAutomata = automata.NK_Automata(N, K)
-	nkAutomata.generateRandomAutomata()
-	print "automata", nkAutomata
-
-	nkAutomata.spanAutomata()
-	print "satespan",nkAutomata.stateSpan
-
-	nkAutomata.analyseAutomata()
-	print nkAutomata.stateList
-
-	nkAutomata.makeAttractorStatesDictionary()
-	print "attractor states:", nkAutomata.attractorStatesDict
-
-	drawGraphObject = drawgraph.DrawGraph()
-	tmpSatesGraph=tempfile.NamedTemporaryFile()
-	
-	savePath = os.path.dirname(os.path.abspath(__file__))
-	savePath = os.path.join(savePath, "static/graphs/images")
-	
-	drawGraphObject.drawGeneConnecionsGraph(nkAutomata.functionsList,nkAutomata.linksList, savePath)
-
-	drawGraphObject.drawStatesGraph(nkAutomata.stateSpan, savePath)
-
-	drawGraphObject.drawSimplfiedStatesGraph(nkAutomata.attractorStatesDict,2**nkAutomata.N,savePath)
+	print "rebuild automata"
+	nkAutomata = automata.NK_Automata(N,K)
+	nkAutomata.fillAutomata()
 
 	return HttpResponseRedirect(reverse('index'))
+
+
+
+def dynamic_image(request, graph_name):
+	global nkAutomata
+	# template = loader.get_template('graphs/im.html')
+	# context = RequestContext(request, {})
+
+	# return HttpResponse(template.render(context))
+	# return HttpResponse("--> "+os.getcwd())
+	if nkAutomata:
+		nkAutomata = automata.NK_Automata()
+		nkAutomata.fillAutomata()
+
+	drawer = drawgraph.DrawGraph(nkAutomata)
+	print nkAutomata
+	image = drawer.drawGraphByName(graph_name)
+
+
+
+
+	# imgPath =os.path.join(os.getcwd(),"graphs/static/graphs/images/"+image_name+".svg")
+	# imgXmlTree=ET.parse(imgPath)
+	# treeRoot=imgXmlTree.getroot()
+	# treeRoot.attrib["width"]='100%'
+	# treeRoot.attrib["height"]='100%'
+	# imgXmlTree.write(imgPath)
+
+
+	# image_data = open(imgPath, "rb").read()
+	return HttpResponse(image, content_type="image/svg+xml")
+
+

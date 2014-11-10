@@ -3,7 +3,7 @@ import boolfunction
 import state
 
 import sys
-
+import drawgraph
 
 
 from debug import log
@@ -14,7 +14,7 @@ from state import State
 #automataAnalysis
 
 class NK_Automata(object):
-    def __init__(self,p_N=0,p_K=0,p_functionsList=[],p_linksList=[],p_viewStatesAsBinary=False):
+    def __init__(self,p_N=5,p_K=5,p_functionsList=[],p_linksList=[],p_viewStatesAsBinary=False):
         self.N=p_N
         self.K=p_K
         self.functionsList=p_functionsList
@@ -226,3 +226,16 @@ class NK_Automata(object):
                 else:
                     self.attractorStatesDict[state.asInt()]=[(self.stepAutomata(state)).asInt(),state.weight]
         
+    def fillAutomata(self):
+
+        self.generateRandomAutomata()
+        # print "automata", self
+
+        self.spanAutomata()
+        # print "satespan",self.stateSpan
+
+        self.analyseAutomata()
+        # print self.stateList
+
+        self.makeAttractorStatesDictionary()
+        # print "attractor states:", self.attractorStatesDict

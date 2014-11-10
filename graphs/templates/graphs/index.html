@@ -23,16 +23,22 @@
 	<tbody>
 		<tr>
 			<td class="img_table_cell">
-				<a href="{% static 'graphs/images/tempGeneLinksGraph.svg' %}"><img  src="{% static 'graphs/images/tempGeneLinksGraph.svg' %}"></a>
-				<div>Genes` links network</div>
+				<a href = "{% url 'dynamic-image' "gene_links_graph" %}">image
+					<img scr="{% url 'dynamic-image' "gene_links_graph" %}">
+				</a>
+				<div>Genes' links network</div>
 			</td>
 			<td class="img_table_cell">
-				<a href="{% static 'graphs/images/tempStatesGraph.svg' %}"><img  src="{% static 'graphs/images/tempStatesGraph.svg' %}"></a>
+				<a href = "{% url 'dynamic-image' "cell_states_graph" %}">image2
+					<img scr="{% url 'dynamic-image' "cell_states_graph" %}">
+				</a>
 				<div>Cell states graph</div>
 			</td>
 			<td class="img_table_cell">
-				<a href="{% static 'graphs/images/tempSiplifiedStatesGraph.svg' %}"><img src="{% static 'graphs/images/tempSiplifiedStatesGraph.svg' %}"></a>
-				<div>Simplified cell states graph (in what way?)</div>
+				<a href = "{% url 'dynamic-image' "simplified_cell_states_graph" %}">image3
+					<img scr="{% url 'dynamic-image' "simplified_cell_states_graph" %}">
+				</a>
+				<div>Simplified cell states graph (guess in what way)</div>
 			</td>
 		</tr>
 	</tbody>
