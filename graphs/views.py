@@ -20,13 +20,15 @@ import svgwrite
 import xml.etree.ElementTree as ET
 
 
+def index(request,N=5,K=5): #todo remove defult value dublication
 
-
-
-
-def index(request):
 	template = loader.get_template('graphs/index.html')
 	context = RequestContext(request, {
+		'N':N,
+		'K':K,
+		'gene_links_graph':reverse('dynamic-image', args=['gene_links_graph']),
+		'cell_states_graph':reverse('dynamic-image', args=['cell_states_graph']),
+		'simplified_cell_states_graph':reverse('dynamic-image', args=['simplified_cell_states_graph']),
 		})
 
 	return HttpResponse(template.render(context))
@@ -41,11 +43,11 @@ def build(request):
 	
 	N = int(request.POST['nValue'])
 	K = int(request.POST['kValue'])
-	print "rebuild automata"
+	
 	nkAutomata = automata.NK_Automata(N,K)
 	nkAutomata.fillAutomata()
 
-	return HttpResponseRedirect(reverse('index'))
+	return HttpResponseRedirect(reverse('index', args=[N,K]))
 
 
 
@@ -56,23 +58,25 @@ def dynamic_image(request, graph_name):
 
 	# return HttpResponse(template.render(context))
 	# return HttpResponse("--> "+os.getcwd())
-	if nkAutomata:
+	if not 'nkAutomata' in globals():
 		nkAutomata = automata.NK_Automata()
 		nkAutomata.fillAutomata()
 
 	drawer = drawgraph.DrawGraph(nkAutomata)
-	print nkAutomata
+	
 	image = drawer.drawGraphByName(graph_name)
 
-
-
+	if image == None:
+		print "noimage"
+		return
 
 	# imgPath =os.path.join(os.getcwd(),"graphs/static/graphs/images/"+image_name+".svg")
-	# imgXmlTree=ET.parse(imgPath)
-	# treeRoot=imgXmlTree.getroot()
-	# treeRoot.attrib["width"]='100%'
-	# treeRoot.attrib["height"]='100%'
-	# imgXmlTree.write(imgPath)
+	treeRoot=ET.fromstring(image)
+
+	treeRoot.attrib["width"]='100%'
+	treeRoot.attrib["height"]='100%'
+
+	image = ET.tostring(treeRoot, encoding='utf8', method='xml')
 
 
 	# image_data = open(imgPath, "rb").read()

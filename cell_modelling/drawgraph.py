@@ -23,7 +23,6 @@ class DrawGraph(object):
 
 
     def geneLinksGraph(self):
-        print "Saving function links"
         A= AGraph()
         for i in range(len(self.automata.linksList)):
             A.add_node(i,label="gene "+str(i)) #str(int(str(functionsList[i]),2)))
@@ -41,8 +40,10 @@ class DrawGraph(object):
         # savePath=currentFolder+'/'+"tempGeneLinksGraph.svg"
         # print "Saving bool function links graph to file..."
           
-        #save temporaryly
-        return A.draw(format='svg')
+        #save temporarily
+        
+        img = A.draw(format='svg')
+        return img
         # print "The graph has been saved at", savePath
  
 
@@ -74,12 +75,12 @@ class DrawGraph(object):
         # print "Saving graph to file..."
         # A.draw(os.path.join(saveFolderPath,"tempStatesGraph.svg"))
         # print "The graph has been saved at", saveFolderPath
-
+        
         return A.draw(format='svg')
         
         
     def simplifiedCellStatesGraph(self):
-        print "Drawing attractor automata states graph:"
+        #print "Drawing attractor automata states graph:"
         A=AGraph()
         i=0
         minNodeSize=0.5
@@ -106,6 +107,7 @@ class DrawGraph(object):
         
         # A.draw(savePath)
         # print "The graph has been saved at", savePath
+        
         return A.draw(format='svg')
 
   

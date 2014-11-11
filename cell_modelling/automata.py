@@ -69,11 +69,10 @@ class NK_Automata(object):
 
 
     def spanAutomata(self):
-
         if self.stateSpan:
             self.stateSpan={}
 
-        print "Iterating automata states:"
+        #print "Iterating automata states:"
         currentState=State(0,self.N)
         nextState=State(0,self.N)
         for stateNumber in range(2**self.N):
@@ -151,7 +150,7 @@ class NK_Automata(object):
     ###
 
     def analyseAutomata(self):
-        print "starting analysis:"
+        #print "starting analysis:"
         self.createStateList()
         sampleNumber=0
         for stateNumber in range(2**self.N):

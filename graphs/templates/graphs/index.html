@@ -16,27 +16,27 @@
 		<p>K = <span id="kValue"></span> <div id="kSlider"></div></p>
 		<input id="nInput" type="hidden" value="" name="nValue">
 		<input id="kInput" type="hidden" value="" name="kValue">
-		<input type="submit" value="Build random genetic network">
+		<div class="button_wrapper"><input class="button" type="submit" value="Build random genetic network"></div>
 	</form>
 
 	<table class="img_table">
 	<tbody>
 		<tr>
 			<td class="img_table_cell">
-				<a href = "{% url 'dynamic-image' "gene_links_graph" %}">image
-					<img scr="{% url 'dynamic-image' "gene_links_graph" %}">
+				<a href = "{{ gene_links_graph }}">
+					<img src="{{ gene_links_graph }}" alt="img1">
 				</a>
 				<div>Genes' links network</div>
 			</td>
 			<td class="img_table_cell">
-				<a href = "{% url 'dynamic-image' "cell_states_graph" %}">image2
-					<img scr="{% url 'dynamic-image' "cell_states_graph" %}">
+				<a href = "{{cell_states_graph}}">
+					<img src="{{cell_states_graph}}" alt="img2">
 				</a>
 				<div>Cell states graph</div>
 			</td>
 			<td class="img_table_cell">
-				<a href = "{% url 'dynamic-image' "simplified_cell_states_graph" %}">image3
-					<img scr="{% url 'dynamic-image' "simplified_cell_states_graph" %}">
+				<a href = "{{simplified_cell_states_graph}}">
+					<img src="{{simplified_cell_states_graph}}" alt="img3">
 				</a>
 				<div>Simplified cell states graph (guess in what way)</div>
 			</td>
@@ -49,13 +49,14 @@
 		$(document).ready(function(){
 			var minValue = 1;
 			var maxValue = 10;
-			var defaultValue=5;
-			$( "#nSlider" ).slider({ min: minValue, max:maxValue,value: defaultValue });
-    		$( "#kSlider" ).slider({ min: minValue, max:maxValue,value: defaultValue });
-    		$("#nValue").html(defaultValue);
-    		$("#kValue").html(defaultValue);
-    		$("#nInput").attr("value",defaultValue);
-    		$("#kInput").attr("value",defaultValue);
+			var currentNValue={{N}};
+			var currentKValue={{K}};
+			$( "#nSlider" ).slider({ min: minValue, max:maxValue,value: currentNValue });
+    		$( "#kSlider" ).slider({ min: minValue, max:maxValue,value: currentKValue });
+    		$("#nValue").html(currentNValue);
+    		$("#kValue").html(currentKValue);
+    		$("#nInput").attr("value",currentNValue);
+    		$("#kInput").attr("value",currentKValue);
 
 		});
 
