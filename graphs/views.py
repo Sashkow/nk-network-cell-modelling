@@ -16,7 +16,7 @@ import os
 
 import random 
 
-import svgwrite
+
 import xml.etree.ElementTree as ET
 
 
