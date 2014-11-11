@@ -9,7 +9,7 @@
 </head>
 <body>
 	
-	<h1>This is NK-network of living cell genetic regulation. What are N and K?</h1>
+	<h1>This is NK-network of living cell genetic regulation.<a href="{% static 'graphs/html/explanation.html' %}">What are N and K?</a> </h1>
 	<form action ="{% url 'build' %}" method="post">
 		{% csrf_token %}
 		<p>N = <span id="nValue"></span> <div id="nSlider"></div></p>
