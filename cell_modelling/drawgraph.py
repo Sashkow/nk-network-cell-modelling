@@ -83,7 +83,7 @@ class DrawGraph(object):
         #print "Drawing attractor automata states graph:"
         A=AGraph()
         i=0
-        minNodeSize=0.5
+        minNodeSize=1
         maxNodeSize=10
         minFontSize=14.0
         d=self.automata.attractorStatesDict
@@ -92,7 +92,7 @@ class DrawGraph(object):
         for item in d:            
             nodeSize=minNodeSize+maxNodeSize* float(d[item][1])/statesAmount
             #print item, nodeSize, "=", minNodeSize,"+",maxNodeSize,"*",d[item][1],"/", statesAmount
-            A.add_node(item,label=item,width=nodeSize,height=nodeSize/2, fontsize=(nodeSize*pointsPerInch)/2)
+            A.add_node(item,label=d[item][1],width=nodeSize,height=nodeSize/2, fontsize=(nodeSize*pointsPerInch)/2)
 
         
         for item in d:
