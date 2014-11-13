@@ -29,12 +29,10 @@ class DrawGraph(object):
 
         for boolFunNumber in range(len(self.automata.linksList)):
             for link in self.automata.linksList[boolFunNumber]:
-                #print link, "->", boolFunNumber
                 if (str(boolFunNumber),str(link)) in A.edges():
                     A.add_edge(link,boolFunNumber,dir='both')
                 else:
                     A.add_edge(link,boolFunNumber,dir='forward')
-                    
         A.layout(prog='dot')
      
         # savePath=currentFolder+'/'+"tempGeneLinksGraph.svg"

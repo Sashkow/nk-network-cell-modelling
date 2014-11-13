@@ -3,21 +3,26 @@
 <head>
 	{% load staticfiles %}
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-	<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+	<script src="{% static "graphs/js/jquery-1.10.2.js" %}" type="text/javascript" ></script>
+	<script src="{% static "graphs/js/jquery-ui.js" %}" type="text/javascript"></script>
+	<script src="{% static "graphs/js/jquery.js" %}" type="text/javascript"></script>
+	<script src="{% static "graphs/js/ajax.js" %}" type="text/javascript"></script>
 	<link rel="stylesheet" type="text/css" href="{% static 'graphs/style.css' %}" />
 </head>
 <body>
 	
 	<h1>This is NK-network of living cell genetic regulation.<a href="{% static 'graphs/html/explanation.html' %}">What are N and K?</a> </h1>
-	<form action ="{% url 'build' %}" method="post">
+	<form action ="{% url 'build' %}" method="post" style="display:inline">
 		{% csrf_token %}
 		<p>N = <span id="nValue"></span> <div id="nSlider"></div></p>
 		<p>K = <span id="kValue"></span> <div id="kSlider"></div></p>
-		<input id="nInput" type="hidden" value="" name="nValue">
-		<input id="kInput" type="hidden" value="" name="kValue">
-		<div class="button_wrapper"><input class="button" type="submit" value="Build random genetic network"></div>
+		<input id="nInput" type="hidden" value="{{N}}" name="nValue">
+		<input id="kInput" type="hidden" value="{{K}}" name="kValue">
+		<div class="button_wrapper">
+			<input class="button" type="submit" value="Build random genetic network"> 
+		</div>
 	</form>
+
 
 	<table class="img_table">
 	<tbody>
@@ -44,43 +49,18 @@
 	</tbody>
 	</table>
 
+	<div class="button_wrapper" >
+			<input id="like" class="button" type="submit" value="Like:)" style="display:inline" >
+			<div id="like_count" style="display: inline"> {{ likes }} </div>
+	</div>
+	
 
 	<script>
-		$(document).ready(function(){
-			var minValue = 1;
-			var maxValue = 10;
-			var currentNValue={{N}};
-			var currentKValue={{K}};
-			$( "#nSlider" ).slider({ min: minValue, max:maxValue,value: currentNValue });
-    		$( "#kSlider" ).slider({ min: minValue, max:maxValue,value: currentKValue });
-    		$("#nValue").html(currentNValue);
-    		$("#kValue").html(currentKValue);
-    		$("#nInput").attr("value",currentNValue);
-    		$("#kInput").attr("value",currentKValue);
+		
 
-		});
-
-		$( "#nSlider" ).on( "slide", function( event, ui ) {
-			$("#nValue").html(ui.value);
-			$("#nInput").attr("value",ui.value);
-			if (ui.value < $( "#kSlider" ).slider( "value" )){
-				$( "#kSlider" ).slider( "value", ui.value );
-				$( "#kValue" ).html(ui.value);
-    			$( "#kInput" ).attr("value",ui.value);
-			}
-				
-		});
-
-		$( "#kSlider" ).on( "slide", function( event, ui ) {
-			$("#kValue").html(ui.value);
-			$("#kInput").attr("value",ui.value);
-			if (ui.value > $( "#nSlider" ).slider( "value" )){
-				$( "#nSlider" ).slider( "value", ui.value );
-				$( "#nValue" ).html(ui.value);
-				$( "#nInput" ).attr("value",ui.value);
-    		}
-				
-		});
+		
+		
+});
 
 	</script>	
 </body>

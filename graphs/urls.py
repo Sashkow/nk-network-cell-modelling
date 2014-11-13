@@ -12,4 +12,5 @@ urlpatterns = patterns('',
     url(r'^build/$',views.build,name='build'),
     url(r'^message/$',views.message, name='message'),
     url(r'^image/(?P<graph_name>[a-zA-z]+)/$', views.dynamic_image, name='dynamic-image'),    
+    url(r'^like/$',views.like,name='like'),
 )

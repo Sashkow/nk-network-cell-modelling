@@ -13,6 +13,8 @@ import tempfile
 
 import os
 
+global likesAmount
+likesAmount=0
 
 import random 
 
@@ -21,6 +23,7 @@ import xml.etree.ElementTree as ET
 
 
 def index(request,N=5,K=5): #todo remove defult value dublication
+	global likesAmount
 
 	template = loader.get_template('graphs/index.html')
 	context = RequestContext(request, {
@@ -29,6 +32,7 @@ def index(request,N=5,K=5): #todo remove defult value dublication
 		'gene_links_graph':reverse('dynamic-image', args=['gene_links_graph']),
 		'cell_states_graph':reverse('dynamic-image', args=['cell_states_graph']),
 		'simplified_cell_states_graph':reverse('dynamic-image', args=['simplified_cell_states_graph']),
+		'likes':likesAmount,
 		})
 
 	return HttpResponse(template.render(context))
@@ -40,6 +44,7 @@ def message(request):
 
 def build(request):
 	global nkAutomata
+
 	
 	N = int(request.POST['nValue'])
 	K = int(request.POST['kValue'])
@@ -53,33 +58,27 @@ def build(request):
 
 def dynamic_image(request, graph_name):
 	global nkAutomata
-	# template = loader.get_template('graphs/im.html')
-	# context = RequestContext(request, {})
 
-	# return HttpResponse(template.render(context))
-	# return HttpResponse("--> "+os.getcwd())
 	if not 'nkAutomata' in globals():
 		nkAutomata = automata.NK_Automata()
 		nkAutomata.fillAutomata()
 
-	drawer = drawgraph.DrawGraph(nkAutomata)
-	
+	drawer = drawgraph.DrawGraph(nkAutomata)	
 	image = drawer.drawGraphByName(graph_name)
-
 	if image == None:
-		print "noimage"
-		return
+		return HttpResponse("noimage")
 
-	# imgPath =os.path.join(os.getcwd(),"graphs/static/graphs/images/"+image_name+".svg")
 	treeRoot=ET.fromstring(image)
-
 	treeRoot.attrib["width"]='100%'
 	treeRoot.attrib["height"]='100%'
-
 	image = ET.tostring(treeRoot, encoding='utf8', method='xml')
 
-
-	# image_data = open(imgPath, "rb").read()
 	return HttpResponse(image, content_type="image/svg+xml")
+
+def like(request):
+	print "CALL like"
+	global likesAmount
+	likesAmount+=1
+	return HttpResponse(likesAmount)
 
 
