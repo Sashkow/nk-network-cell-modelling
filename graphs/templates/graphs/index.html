@@ -12,16 +12,17 @@
 <body>
 	
 	<h1>This is NK-network of living cell genetic regulation.<a href="{% static 'graphs/html/explanation.html' %}">What are N and K?</a> </h1>
-	<form action ="{% url 'build' %}" method="post" style="display:inline">
-		{% csrf_token %}
+	<!-- <form action ="{% url 'build' %}" method="post" style="display:inline"> -->
+		<!-- {% csrf_token %} -->
 		<p>N = <span id="nValue"></span> <div id="nSlider"></div></p>
 		<p>K = <span id="kValue"></span> <div id="kSlider"></div></p>
 		<input id="nInput" type="hidden" value="{{N}}" name="nValue">
 		<input id="kInput" type="hidden" value="{{K}}" name="kValue">
 		<div class="button_wrapper">
-			<input class="button" type="submit" value="Build random genetic network"> 
+			{% csrf_token %}
+			<input id="build_graphs_button" class="button" type="submit" value="Build random genetic network"> 
 		</div>
-	</form>
+	<!-- </form> -->
 
 
 	<table class="img_table">
@@ -50,18 +51,12 @@
 	</table>
 
 	<div class="button_wrapper" >
-			<input id="like" class="button" type="submit" value="Like:)" style="display:inline" >
+			<input id="like_button" class="button" type="submit" value="Like:)" style="display:inline" >
 			<div id="like_count" style="display: inline"> {{ likes }} </div>
 	</div>
 	
 
 	<script>
-		
-
-		
-		
-});
-
 	</script>	
 </body>
 </html>

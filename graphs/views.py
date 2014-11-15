@@ -48,12 +48,23 @@ def build(request):
 	
 	N = int(request.POST['nValue'])
 	K = int(request.POST['kValue'])
+
 	
 	nkAutomata = automata.NK_Automata(N,K)
 	nkAutomata.fillAutomata()
 
 	return HttpResponseRedirect(reverse('index', args=[N,K]))
 
+def buildAjax(request):
+	global nkAutomata
+
+	N = int(request.GET["N"])
+	K = int(request.GET["K"])
+
+	
+	nkAutomata = automata.NK_Automata(N,K)
+	nkAutomata.fillAutomata()
+	return HttpResponse("")
 
 
 def dynamic_image(request, graph_name):
