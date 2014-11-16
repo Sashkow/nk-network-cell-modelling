@@ -17,8 +17,10 @@ $(document).ready(function(){
 				// refresh all images
 				d = new Date();
 				var imgsrc = $(this).attr("src");
-			   	console.log(imgsrc);
-		        $(this).removeAttr("src")
+				console.log(imgsrc);
+				if (imgsrc.indexOf("?")!=-1)
+					imgsrc=imgsrc.substr(0,imgsrc.indexOf("?"));
+				console.log(imgsrc);
 		        $(this).attr("src", imgsrc+"?"+d.getTime());
 
 			});
