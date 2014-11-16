@@ -14,7 +14,7 @@ from state import State
 #automataAnalysis
 
 class NK_Automata(object):
-    def __init__(self,p_N=5,p_K=5,p_functionsList=[],p_linksList=[],p_viewStatesAsBinary=False):
+    def __init__(self,p_N=5,p_K=5,p_functionsList=[],p_linksList=[],p_viewStatesAsBinary=True):
         self.N=p_N
         self.K=p_K
         self.functionsList=p_functionsList
