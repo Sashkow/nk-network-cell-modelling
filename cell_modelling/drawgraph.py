@@ -90,7 +90,7 @@ class DrawGraph(object):
         for item in d:            
             nodeSize=minNodeSize+maxNodeSize* float(d[item][1])/statesAmount
             #print item, nodeSize, "=", minNodeSize,"+",maxNodeSize,"*",d[item][1],"/", statesAmount
-            A.add_node(item,label=d[item][1],width=nodeSize,height=nodeSize/2, fontsize=(nodeSize*pointsPerInch)/2)
+            A.add_node(item,label=str(d[item][1])+"/"+str(item),width=nodeSize,height=nodeSize/2, fontsize=(nodeSize*pointsPerInch)/2)
 
         
         for item in d:
