@@ -14,20 +14,27 @@ from state import State
 #automataAnalysis
 
 class NK_Automata(object):
-    def __init__(self,p_N=5,p_K=5,p_functionsList=[],p_linksList=[],p_viewStatesAsBinary=True):
+    def __init__(self,p_N=5,p_K=5,p_functionsList=None,p_linksList=None,p_viewStatesAsBinary=False):
         self.N=p_N
         self.K=p_K
-        self.functionsList=p_functionsList
-        self.linksList=p_linksList
+
+        if p_functionsList==None:
+            p_functionsList=[]
+        else:
+            self.functionsList= p_functionsList
+
+        if p_linksList==None:
+            self.linksList=[]
+        else:
+            self.linksList=p_linksList
+
         self.ordinalNumber=-1
 
-        #stateSpan: {currentStateNumber: nextStateNumber,...}
-        self.stateSpan={}
-        self.stateList=[]
-        #attractorDict {attractorNumber:[size,basinSize],...}
-        self.attractorDict={} 
-         #attractorStatesDict: {attractorStateNumber:[nextAttractorStateNumber,attractorStateWeight],...}
-        self.attractorStatesDict ={}
+        
+        self.stateSpan={}              #stateSpan: {currentStateNumber: nextStateNumber,...}
+        self.stateList=[]           
+        self.attractorDict={}          #attractorDict {attractorNumber:[size,basinSize],...}
+        self.attractorStatesDict ={}   #attractorStatesDict: {attractorStateNumber:[nextAttractorStateNumber,attractorStateWeight],...} 
 
         self.basinAmount=0
         self.stability=0
