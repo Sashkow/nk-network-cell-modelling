@@ -60,7 +60,7 @@ def build(request):
 	return HttpResponseRedirect(reverse('index', args=[N,K]))
 
 def buildAjax(request):
-	print dict(request.session)
+	print request.user
 	#global nkAutomata
 
 	N = int(request.GET["N"])
@@ -112,9 +112,14 @@ def dynamic_image(request, graph_name):
 	return HttpResponse(image, content_type="image/svg+xml")
 
 def like(request):
-	print "CALL like"
+
 	global likesAmount
-	likesAmount+=1
+	
+	if request.user.is_authenticated():
+    	likesAmount+=1
+	else:
+    	likesAmount+=2
+	
 	return HttpResponse(likesAmount)
 
 
