@@ -72,11 +72,14 @@ def buildAjax(request):
 	savedAutomata = pickle.dumps(nkAutomata)
 
 	c = Cell(n=N,k=K,serialized_object=savedAutomata)
-
 	c.save()
 
-	request.session['current_automata']=savedAutomata
+	# l = Like(user=request.user,cell=c)		
+	# l.save()
 
+	
+
+	request.session['current_automata']=savedAutomata
 
 
 
@@ -112,13 +115,10 @@ def dynamic_image(request, graph_name):
 	return HttpResponse(image, content_type="image/svg+xml")
 
 def like(request):
-
 	global likesAmount
+
+	# if request.user.is_authenticated():
 	
-	if request.user.is_authenticated():
-    	likesAmount+=1
-	else:
-    	likesAmount+=2
 	
 	return HttpResponse(likesAmount)
 
