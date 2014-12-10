@@ -5,9 +5,7 @@ import random
 
 
 def generateNKAutomata(N,K,functionsList,linksList):
-
     generateFunctionsList(N,K,functionsList)
-
     generateLinksList(N,K,linksList)
     #generateState(initialState,N)
 

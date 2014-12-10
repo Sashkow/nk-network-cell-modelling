@@ -36,7 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'graphs'
+    'graphs',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -63,7 +63,7 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
+FIXTURE_DIRS = ('graphs/fixtures')
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
