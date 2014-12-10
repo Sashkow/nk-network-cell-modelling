@@ -7,14 +7,13 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('graphs', '0002_auto_20141120_1304'),
+        ('graphs', '0001_initial'),
     ]
 
     operations = [
-        migrations.AlterField(
+        migrations.RenameField(
             model_name='cell',
-            name='serizlized_object',
-            field=models.TextField(),
-            preserve_default=True,
+            old_name='serialized_object',
+            new_name='pickled_automata',
         ),
     ]

@@ -14,9 +14,16 @@ from state import State
 #automataAnalysis
 
 class NK_Automata(object):
-    def __init__(self,p_N=5,p_K=5,p_functionsList=None,p_linksList=None,p_viewStatesAsBinary=False):
-        self.N=p_N
-        self.K=p_K
+    #static
+    graphNamesList = ['gene_links_graph','cell_states_graph','simplified_cell_states_graph']
+    
+    def __init__(self,p_N=None,p_K=None,p_functionsList=None,p_linksList=None,p_viewStatesAsBinary=False):
+        if p_N==None or p_K==None:
+            self.N=5
+            self.K=5
+        else:
+            self.N=p_N
+            self.K=p_K
 
         if p_functionsList==None:
             p_functionsList=[]
@@ -43,7 +50,7 @@ class NK_Automata(object):
 
         self.viewStatesAsBinary=p_viewStatesAsBinary
 
-
+        
 
     def __sizeof__(self):
         return sys.getsizeof(self.N) + sys.getsizeof(self.K) + sys.getsizeof(self.functionsList) + sys.getsizeof(self.linksList)+ sys.getsizeof(self.stateSpan)+ sys.getsizeof(self.basinAmount) + sys.getsizeof(self.stability)+ sys.getsizeof(self.attractorDict)

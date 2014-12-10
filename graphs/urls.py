@@ -13,5 +13,8 @@ urlpatterns = patterns('',
     url(r'^build_ajax/$',views.buildAjax,name='build-ajax'),
     url(r'^message/$',views.message, name='message'),
     url(r'^image/(?P<graph_name>[a-zA-z]+)/$', views.dynamic_image, name='dynamic-image'),    
+    url(r'^image/(?P<cell_id>[0-9]+)/(?P<graph_name>[a-zA-z]+)/$', views.dynamic_image_by_cell_id, name='dynamic-image-by-cell-id'),    
     url(r'^like/$',views.like,name='like'),
+    url(r'^cells_top_list/$',views.showMostLikedCells,name='cells-top-list')
+
 )
