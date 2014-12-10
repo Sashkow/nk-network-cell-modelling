@@ -60,32 +60,16 @@ def build(request):
 	return HttpResponseRedirect(reverse('index', args=[N,K]))
 
 def buildAjax(request):
-<<<<<<< HEAD
-	print request.user
-	#global nkAutomata
-
-=======
 	global likesAmount
 	likesAmount = 0
->>>>>>> second_strange_branch
+
 	N = int(request.GET["N"])
 	K = int(request.GET["K"])
 
 	createCurrentAutomata(request,N,K)
 
-<<<<<<< HEAD
-	c = Cell(n=N,k=K,serialized_object=savedAutomata)
-	c.save()
-
-	# l = Like(user=request.user,cell=c)		
-	# l.save()
-
-	
-=======
 	return HttpResponse("")
->>>>>>> second_strange_branch
 
-	request.session['current_automata']=savedAutomata
 
 def dynamic_image(request, graph_name):
 
@@ -132,18 +116,15 @@ def dynamic_image_by_cell_id(request, graph_name, cell_id):
 
 def like(request):
 	global likesAmount
-<<<<<<< HEAD
 
-	# if request.user.is_authenticated():
-	
-	
-	return HttpResponse(likesAmount)
-=======
 	cell_id = getCurrentCellId(request)
 	c = Cell.objects.get(id=cell_id)
 	userLazySimpleObject = request.user
 	#todo if authorized
-	u = User.objects.get(id=userLazySimpleObject.id)
+	if request.user.is_authenticated():
+		u = User.objects.get(id=userLazySimpleObject.id)
+	else:
+		u = User.objects.get(username='guest')
 	l = Like(cell=c,user=u)
 	l.save()
 	
@@ -177,7 +158,7 @@ def getPickledCurrentAutomata(request):
 def getCurrentAutomata(request):
 	return pickle.loads(getPickledCurrentAutomata(request))
 
->>>>>>> second_strange_branch
+
 
 
 #show previous graphs

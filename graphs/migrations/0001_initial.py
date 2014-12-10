@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('n', models.IntegerField()),
                 ('k', models.IntegerField()),
-                ('serialized_object', models.TextField()),
+                ('pickled_automata', models.TextField()),
             ],
             options={
             },
