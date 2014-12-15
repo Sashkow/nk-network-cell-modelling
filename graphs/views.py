@@ -1,3 +1,5 @@
+
+
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
 
@@ -12,6 +14,8 @@ from cell_modelling import drawgraph
 from graphs.models import Cell
 from graphs.models import Like
 from django.contrib.auth.models import User
+
+
 
 import tempfile
 
@@ -70,6 +74,26 @@ def buildAjax(request):
 
 	return HttpResponse("")
 
+def adjustSvg(image):
+	#manually set image width and height
+	treeRoot=ET.fromstring(image)
+	treeRoot.attrib["width"]='100%'
+	treeRoot.attrib["height"]='100%'
+
+	#set font size in pixtels for Firefox browser 
+	for e in treeRoot.getiterator():
+		if 'font-size' in e.attrib:
+			e.attrib["font-size"]=e.attrib["font-size"]+"px"
+
+	#set transparent background 
+	polygonElement = treeRoot.getiterator()[3]
+	polygonElement.attrib["fill"]="transparent"
+	polygonElement.attrib["stroke"]="transparent"
+
+	image = ET.tostring(treeRoot, encoding='utf8', method='xml')
+	return image
+
+
 
 def dynamic_image(request, graph_name):
 
@@ -80,15 +104,7 @@ def dynamic_image(request, graph_name):
 	if image == None:
 		return HttpResponse("noimage")
 
-	treeRoot=ET.fromstring(image)
-	treeRoot.attrib["width"]='100%'
-	treeRoot.attrib["height"]='100%'
-
-	polygonElement = treeRoot.getiterator()[3]
-	polygonElement.attrib["fill"]="transparent"
-	polygonElement.attrib["stroke"]="transparent"
-
-	image = ET.tostring(treeRoot, encoding='utf8', method='xml')
+	image = adjustSvg(image)
 
 	return HttpResponse(image, content_type="image/svg+xml")
 
@@ -101,16 +117,7 @@ def dynamic_image_by_cell_id(request, graph_name, cell_id):
 	if image == None:
 		return HttpResponse("noimage")
 
-	treeRoot=ET.fromstring(image)
-	treeRoot.attrib["width"]='100%'
-	treeRoot.attrib["height"]='100%'
-
-	polygonElement = treeRoot.getiterator()[3]
-	polygonElement.attrib["fill"]="transparent"
-	polygonElement.attrib["stroke"]="transparent"
-
-
-	image = ET.tostring(treeRoot, encoding='utf8', method='xml')
+	image = adjustSvg(image)
 
 	return HttpResponse(image, content_type="image/svg+xml")
 
@@ -158,9 +165,6 @@ def getPickledCurrentAutomata(request):
 def getCurrentAutomata(request):
 	return pickle.loads(getPickledCurrentAutomata(request))
 
-
-
-
 #show previous graphs
 def showMostLikedCells(request):
 	from django.db import connection
@@ -179,3 +183,7 @@ def showMostLikedCells(request):
 		for graph_name in automata.NK_Automata.graphNamesList:
 			graphs_list.append(str(reverse('dynamic-image-by-cell-id', args=[cell[0],graph_name])))
 		graphs_list_list.append(graphs_list)
+
+
+
+
