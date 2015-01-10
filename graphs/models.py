@@ -22,7 +22,7 @@ class LikeManager(models.Manager):
 			self.k=None
 			self.like_count=None
 
-	def getMostLikedCellsInfo(self):
+	def get_most_liked_cells_info(self):
 		from django.db import connection
 		cursor = connection.cursor()
 		cursor.execute("SELECT graphs_like.cell_id, graphs_cell.n, graphs_cell.k, COUNT(graphs_like.id) AS like_count \
@@ -32,19 +32,19 @@ class LikeManager(models.Manager):
 		 		 		GROUP BY cell_id \
 		 				ORDER BY like_count DESC;")
 		rows = cursor.fetchall()
-		infoList=[]
+		info_list=[]
 		for row in rows:
-			cellViewInfoObject=LikeManager.CellViewInfo()
+			cell_view_info_object=LikeManager.CellViewInfo()
 			graphs_list=[]
-			for graph_name in automata.NK_Automata.graphNamesList:
+			for graph_name in automata.NK_Automata.graph_names_list:
 				graphs_list.append(str(reverse('dynamic-image-by-cell-id', args=[row[0],graph_name])))
-			cellViewInfoObject.graphs_list=graphs_list
-			cellViewInfoObject.id=row[0]
-			cellViewInfoObject.n=row[1]
-			cellViewInfoObject.k=row[2]
-			cellViewInfoObject.like_count=row[3]
-			infoList.append(cellViewInfoObject)
-		return infoList
+			cell_view_info_object.graphs_list=graphs_list
+			cell_view_info_object.id=row[0]
+			cell_view_info_object.n=row[1]
+			cell_view_info_object.k=row[2]
+			cell_view_info_object.like_count=row[3]
+			info_list.append(cell_view_info_object)
+		return info_list
 
 class Like(models.Model):
 	user=models.ForeignKey(User)

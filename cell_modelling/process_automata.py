@@ -16,43 +16,43 @@ import saveload
 
 import os
    #N=4 K=2 8257536 
-def doAutomata(N,K,drawGraphObject,nkAutomata=None,ordinalNumber=-1):
-    currentFolderPath = os.path.dirname(__file__)
+def do_automata(N,K,draw_graph_object,nk_automata=None,ordinal_number=-1):
+    current_folder_path = os.path.dirname(__file__)
     
-    if nkAutomata == None:
-        nkAutomata = NK_Automata(N, K)
-        nkAutomata.generateRandomAutomata()
+    if nk_automata == None:
+        nk_automata = NK_Automata(N, K)
+        nk_automata.generate_random_automata()
     
-    nkAutomata.ordinalNumber = ordinalNumber
+    nk_automata.ordinal_number = ordinal_number
     
-    drawGraphObject.drawGeneConnecionsGraph(nkAutomata.linksList, currentFolderPath)
+    draw_graph_object.draw_gene_connecions_graph(nk_automata.links_list, current_folder_path)
     
-    #print nkAutomata
+    #print nk_automata
     
-    nkAutomata.spanAutomata()
+    nk_automata.span_automata()
     
-    # print "satespan",nkAutomata.stateSpan
-    
-    
-    nkAutomata.analyseAutomata()
-    
-    # print nkAutomata.stateList
-    
-    nkAutomata.makeAttractorStatDictionary()
-    
-    # print nkAutomata.attractorDict
+    # print "satespan",nk_automata.state_span
     
     
-    # print "stateList", nkAutomata.stateList
+    nk_automata.analyse_automata()
     
-    nkAutomata.countStability()
+    # print nk_automata.state_list
     
-    nkAutomata.countExpectedReturnTime()
+    nk_automata.make_attractor_stat_dictionary()
+    
+    # print nk_automata.attractor_dict
+    
+    
+    # print "state_list", nk_automata.state_list
+    
+    nk_automata.count_stability()
+    
+    nk_automata.count_expected_return_time()
     
     
     
-    drawGraphObject.drawSimplfiedStatesGraph(nkAutomata.makeAttractorsDictionary(),2**nkAutomata.N,currentFolderPath)
+    draw_graph_object.draw_simplfied_states_graph(nk_automata.make_attractors_dictionary(),2**nk_automata.N,current_folder_path)
     
-    drawGraphObject.drawStatesGraph(nkAutomata.stateSpan, currentFolderPath)
+    draw_graph_object.draw_states_graph(nk_automata.state_span, current_folder_path)
     
-    SaveLoad.saveNKAutomata(currentFolderPath, nkAutomata, True)
+    SaveLoad.save_n_k_automata(current_folder_path, nk_automata, True)

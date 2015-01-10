@@ -11,52 +11,52 @@ class DrawGraph(object):
     def __init__(self, automata):
         self.automata = automata
 
-    def drawGraphByName(self,graphName):
-        if graphName == 'gene_links_graph':
-            return self.geneLinksGraph()
-        elif graphName == 'cell_states_graph':
-            return self.cellStatesGraph()
-        elif graphName == 'simplified_cell_states_graph':
-            return self.simplifiedCellStatesGraph()
+    def draw_graph_by_name(self,graph_name):
+        if graph_name == 'gene_links_graph':
+            return self.gene_links_graph()
+        elif graph_name == 'cell_states_graph':
+            return self.cell_states_graph()
+        elif graph_name == 'simplified_cell_states_graph':
+            return self.simplified_cell_states_graph()
         else:
             raise Exception("Wrong graph name")
 
 
-    def geneLinksGraph(self):
+    def gene_links_graph(self):
         A= AGraph()
-        for i in range(len(self.automata.linksList)):
-            A.add_node(i,label="gene "+str(i)) #str(int(str(functionsList[i]),2)))
+        for i in range(len(self.automata.links_list)):
+            A.add_node(i,label="gene "+str(i)) #str(int(str(functions_list[i]),2)))
 
-        for boolFunNumber in range(len(self.automata.linksList)):
-            for link in self.automata.linksList[boolFunNumber]:
-                if (str(boolFunNumber),str(link)) in A.edges():
-                    A.add_edge(link,boolFunNumber,dir='both')
+        for bool_fun_number in range(len(self.automata.links_list)):
+            for link in self.automata.links_list[bool_fun_number]:
+                if (str(bool_fun_number),str(link)) in A.edges():
+                    A.add_edge(link,bool_fun_number,dir='both')
                 else:
-                    A.add_edge(link,boolFunNumber,dir='forward')
+                    A.add_edge(link,bool_fun_number,dir='forward')
         A.layout(prog='dot')
      
-        # savePath=currentFolder+'/'+"tempGeneLinksGraph.svg"
+        # save_path=current_folder+'/'+"temp_gene_links_graph.svg"
         # print "Saving bool function links graph to file..."
           
         #save temporarily
         
         img = A.draw(format='svg')
         return img
-        # print "The graph has been saved at", savePath
+        # print "The graph has been saved at", save_path
  
 
-    def cellStatesGraph(self):
+    def cell_states_graph(self):
         #d={[1]: {[2],[3]},[2]:{[4],[5]},[3]:{}}
         print "Drawing automata states graph:"
         A=AGraph()
         i=0
-        d = self.automata.stateSpan
+        d = self.automata.state_span
         
         for item in d:
           
             i+=1
             percentage =int((float(i)/float(len(d)))*100)
-            #self.valueUpdated.emit(percentage) # progress bar
+            #self.value_updated.emit(percentage) # progress bar
             
             if (str(d[item]),str(item)) in A.edges(): 
                 A.add_edge(item,d[item], dir='both',arrowhead='normal')
@@ -69,28 +69,28 @@ class DrawGraph(object):
             # else:
             #     A.add_edge(item,d[item][0],dir='forward',arrowhead='normal',label=d[item][1])
         A.layout(prog='neato')
-        #savePath=currentFolder+'/'+"tempStatesGraph.svg"
+        #save_path=current_folder+'/'+"temp_states_graph.svg"
         # print "Saving graph to file..."
-        # A.draw(os.path.join(saveFolderPath,"tempStatesGraph.svg"))
-        # print "The graph has been saved at", saveFolderPath
+        # A.draw(os.path.join(save_folder_path,"temp_states_graph.svg"))
+        # print "The graph has been saved at", save_folder_path
         
         return A.draw(format='svg')
         
         
-    def simplifiedCellStatesGraph(self):
+    def simplified_cell_states_graph(self):
         #print "Drawing attractor automata states graph:"
         A=AGraph()
         i=0
-        minNodeSize=1
-        maxNodeSize=10
-        minFontSize=14.0
-        d=self.automata.attractorStatesDict
-        statesAmount = 2**(self.automata.N)
-        pointsPerInch=72 
+        min_node_size=1
+        max_node_size=10
+        min_font_size=14.0
+        d=self.automata.attractor_states_dict
+        states_amount = 2**(self.automata.N)
+        points_per_inch=72 
         for item in d:            
-            nodeSize=minNodeSize+maxNodeSize* float(d[item][1])/statesAmount
-            #print item, nodeSize, "=", minNodeSize,"+",maxNodeSize,"*",d[item][1],"/", statesAmount
-            A.add_node(item,label=str(d[item][1])+"|"+str(item),width=nodeSize,height=nodeSize/2, fontsize=(nodeSize*pointsPerInch)/2)
+            node_size=min_node_size+max_node_size* float(d[item][1])/states_amount
+            #print item, node_size, "=", min_node_size,"+",max_node_size,"*",d[item][1],"/", states_amount
+            A.add_node(item,label=str(d[item][1])+"|"+str(item),width=node_size,height=node_size/2, fontsize=(node_size*points_per_inch)/2)
 
         
         for item in d:
@@ -101,29 +101,29 @@ class DrawGraph(object):
             
         A.layout(prog='circo')
         
-        # savePath=currentFolder+'/'+"tempSiplifiedStatesGraph.svg"
+        # save_path=current_folder+'/'+"temp_siplified_states_graph.svg"
         # print "Saving graph to file..."
         
-        # A.draw(savePath)
-        # print "The graph has been saved at", savePath
+        # A.draw(save_path)
+        # print "The graph has been saved at", save_path
         
         return A.draw(format='svg')
 
   
-# def drawTriangles():
+# def draw_triangles():
   
 #   A=AGraph()
 #   A.node_attr['style']='filled'
-#   A.add_node('1',label='1stGender', fillcolor='black', fontcolor='white')
-#   A.add_node('2',label='2ndGender', fillcolor='red')
-#   A.add_node('3',label='1stGender', fillcolor='black', fontcolor='white')
+#   A.add_node('1',label='1st_gender', fillcolor='black', fontcolor='white')
+#   A.add_node('2',label='2nd_gender', fillcolor='red')
+#   A.add_node('3',label='1st_gender', fillcolor='black', fontcolor='white')
   
 #   A.add_edge('1','2', dir='forward',arrowhead='normal')
 #   A.add_edge('2','3', dir='forward',arrowhead='normal')
   
-#   A.add_node('4',label='1stGender', fillcolor='black', fontcolor='white')
-#   A.add_node('5',label='2ndGender', fillcolor='red')
-#   A.add_node('6',label='1stGender', fillcolor='black', fontcolor='white')
+#   A.add_node('4',label='1st_gender', fillcolor='black', fontcolor='white')
+#   A.add_node('5',label='2nd_gender', fillcolor='red')
+#   A.add_node('6',label='1st_gender', fillcolor='black', fontcolor='white')
   
 #   A.add_edge('4','5', dir='forward',arrowhead='normal')
 #   A.add_edge('5','6', dir='forward',arrowhead='normal')
@@ -133,12 +133,12 @@ class DrawGraph(object):
 #   A.draw('tr.svg')
  
 
-# def drawDifferentNodes():
+# def draw_different_nodes():
 #   A=AGraph()
 #   A.node_attr['style']='filled'
-#   A.add_node('1',label='1stGender', fillcolor='black', fontcolor='white',height=0.5,width=0.5)
-#   A.add_node('2',label='2ndGender', fillcolor='red',height=1,width=1)
-#   A.add_node('3',label='1stGender', fillcolor='black', fontcolor='white',height=5,width=5)
+#   A.add_node('1',label='1st_gender', fillcolor='black', fontcolor='white',height=0.5,width=0.5)
+#   A.add_node('2',label='2nd_gender', fillcolor='red',height=1,width=1)
+#   A.add_node('3',label='1st_gender', fillcolor='black', fontcolor='white',height=5,width=5)
   
 #   A.add_edge('1','2', dir='forward',arrowhead='normal')
 #   A.add_edge('2','3', dir='forward',arrowhead='normal')
@@ -146,7 +146,7 @@ class DrawGraph(object):
 #   A.layout(prog='circo')
 #   A.draw('tr2.svg')
 # """
-# drawDifferentNodes()
+# draw_different_nodes()
 # # set some default node attributes
 
 # A.node_attr['style']='filled'

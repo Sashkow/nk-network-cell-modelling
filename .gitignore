@@ -1,3 +1,21 @@
+*.sqlite3
+*.swp
+*.swo
+*.swn
+*.esproj
+.idea
+.Ds_Store
+*~
+git_ignore
+*.dat
+
+venv
+.venv
+.env
+env
+
+*.bak
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

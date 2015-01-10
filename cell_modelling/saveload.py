@@ -5,15 +5,15 @@ import pickle
 import shutil
 import os.path
 
-def saveVariableToFile(variable,fileName,filePath):
-    aFile=open(filePath+'/'+fileName,'w')
-    pickle.dump(variable,aFile)
-    aFile.close()
+def save_variable_to_file(variable,file_name,file_path):
+    a_file=open(file_path+'/'+file_name,'w')
+    pickle.dump(variable,a_file)
+    a_file.close()
 
-def loadVariableFromFile(fileName,filePath):
-    aFile=open(filePath+'/'+fileName,'r')
-    variable = pickle.load(aFile)
-    aFile.close()
+def load_variable_from_file(file_name,file_path):
+    a_file=open(file_path+'/'+file_name,'r')
+    variable = pickle.load(a_file)
+    a_file.close()
     return variable
 
 import sys
@@ -23,90 +23,90 @@ import shutil
 from proxyfunctions import*
 
 
-def saveVariableToFile(variable,fileName,filePath):
-    aFile=open(filePath+'/'+fileName,'w')
-    pickle.dump(variable,aFile)
-    aFile.close()
+def save_variable_to_file(variable,file_name,file_path):
+    a_file=open(file_path+'/'+file_name,'w')
+    pickle.dump(variable,a_file)
+    a_file.close()
 
-def loadVariableFromFile(fileName,filePath):
-    aFile=open(filePath+'/'+fileName,'r')
-    #print filePath+'/'+fileName
-    variable = pickle.load(aFile)
-    aFile.close()
+def load_variable_from_file(file_name,file_path):
+    a_file=open(file_path+'/'+file_name,'r')
+    #print file_path+'/'+file_name
+    variable = pickle.load(a_file)
+    a_file.close()
     return variable
 
-def generateAutomataTypeFolderName(N,K):
-    maxNK=20
-    return "N_"+addSucceedingZeroes(maxNK,N)+"_K_"+addSucceedingZeroes(maxNK,K)
+def generate_automata_type_folder_name(N,K):
+    max_n_k=20
+    return "N_"+add_succeeding_zeroes(max_n_k,N)+"__k_"+add_succeeding_zeroes(max_n_k,K)
 
-def generateAutomataFolderName(automataTypeFoldersCollection):
-    maxAutomataFoldersAmount=999
-    currentAutomatFoldersAmount=len(automataTypeFoldersCollection)
-    return addSucceedingZeroes(maxAutomataFoldersAmount,currentAutomatFoldersAmount)
+def generate_automata_folder_name(automata_type_folders_collection):
+    max_automata_folders_amount=999
+    current_automat_folders_amount=len(automata_type_folders_collection)
+    return add_succeeding_zeroes(max_automata_folders_amount,current_automat_folders_amount)
 
-def saveNKAutomata(currentFolderPath,nkAutomata,picture=False):
+def save_n_k_automata(current_folder_path,nk_automata,picture=False):
 
-    dataFolderPath = os.path.join(currentFolderPath, '../../data')
+    data_folder_path = os.path.join(current_folder_path, '../../data')
 
-    automataTypesFolderPath=os.path.join(dataFolderPath,'SavedAutomata')
+    automata_types_folder_path=os.path.join(data_folder_path,'SavedAutomata')
 
-    if not os.path.exists(automataTypesFolderPath):
-        os.makedirs(automataTypesFolderPath)
+    if not os.path.exists(automata_types_folder_path):
+        os.makedirs(automata_types_folder_path)
 
 
-    automataTypesFolderCollection = os.listdir(automataTypesFolderPath)
+    automata_types_folder_collection = os.listdir(automata_types_folder_path)
 
-    automataTypeFolderName = generateAutomataTypeFolderName(nkAutomata.N,nkAutomata.K)
+    automata_type_folder_name = generate_automata_type_folder_name(nk_automata.N,nk_automata.K)
 
-    automataTypeFolderPath = automataTypesFolderPath+'/'+automataTypeFolderName
+    automata_type_folder_path = automata_types_folder_path+'/'+automata_type_folder_name
 
-    if not os.path.exists(automataTypeFolderPath):
-        os.makedirs(automataTypeFolderPath)
+    if not os.path.exists(automata_type_folder_path):
+        os.makedirs(automata_type_folder_path)
 
-    automataFoldersCollection = os.listdir(automataTypeFolderPath)
+    automata_folders_collection = os.listdir(automata_type_folder_path)
 
     #folders are numbered '000','001','002'...
-    automataFolderName = generateAutomataFolderName(automataFoldersCollection)
+    automata_folder_name = generate_automata_folder_name(automata_folders_collection)
 
-    automataFolderPath = automataTypeFolderPath+'/'+automataFolderName
+    automata_folder_path = automata_type_folder_path+'/'+automata_folder_name
 
-    os.makedirs(automataFolderPath)
+    os.makedirs(automata_folder_path)
 
-    #print automataFolderPath
+    #print automata_folder_path
 
-    saveVariableToFile(nkAutomata,'automata.txt',automataFolderPath)
+    save_variable_to_file(nk_automata,'automata.txt',automata_folder_path)
 
     if picture:
-        graphFileName = automataTypeFolderName+'_'+automataFolderName+'.png'
-        graphCyclesOnlyFileName = automataTypeFolderName+'_'+automataFolderName+"_CyclesOnly"+'.png'
-        graphFunLinksFileName = automataTypeFolderName+'_'+automataFolderName+"_FunLinks"+'.png'
+        graph_file_name = automata_type_folder_name+'_'+automata_folder_name+'.png'
+        graph_cycles_only_file_name = automata_type_folder_name+'_'+automata_folder_name+"__cycles_only"+'.png'
+        graph_fun_links_file_name = automata_type_folder_name+'_'+automata_folder_name+"__fun_links"+'.png'
 
-        if os.path.exists(currentFolderPath+'/'+'tempPic.png'):
-            shutil.copyfile(currentFolderPath+'/'+'tempPic.png', os.path.join(dataFolderPath, graphFileName))
-        if os.path.exists(dataFolderPath+'/'+'tempPic2.png'):
-            shutil.copyfile(dataFolderPath+'/'+'tempPic2.png', os.path.join(automataFolderPath,graphCyclesOnlyFileName))
-        if os.path.exists(dataFolderPath+'/'+'tempPic3.png'):
-            shutil.copyfile(dataFolderPath+'/'+'tempPic3.png', os.path.join(automataFolderPath, graphFunLinksFileName))
+        if os.path.exists(current_folder_path+'/'+'temp_pic.png'):
+            shutil.copyfile(current_folder_path+'/'+'temp_pic.png', os.path.join(data_folder_path, graph_file_name))
+        if os.path.exists(data_folder_path+'/'+'temp_pic2.png'):
+            shutil.copyfile(data_folder_path+'/'+'temp_pic2.png', os.path.join(automata_folder_path,graph_cycles_only_file_name))
+        if os.path.exists(data_folder_path+'/'+'temp_pic3.png'):
+            shutil.copyfile(data_folder_path+'/'+'temp_pic3.png', os.path.join(automata_folder_path, graph_fun_links_file_name))
 
 
-def gatherData(automataList,automataFoldersFolderPath):
-    automataFoldersList=os.listdir(automataFoldersFolderPath) #'000','001','002'
+def gather_data(automata_list,automata_folders_folder_path):
+    automata_folders_list=os.listdir(automata_folders_folder_path) #'000','001','002'
     i=0
-    for automataFolderName in automataFoldersList:
+    for automata_folder_name in automata_folders_list:
         print "gathering:", i
         i+=1
-        nkAutomata=loadVariableFromFile('automata.txt',automataFoldersFolderPath+'/'+automataFolderName)
-        automataList.append(nkAutomata)
+        nk_automata=load_variable_from_file('automata.txt',automata_folders_folder_path+'/'+automata_folder_name)
+        automata_list.append(nk_automata)
 
 
-def testFoldersCreation(dataFolderPath):
+def test_folders_creation(data_folder_path):
     automata=[]
     enters=[]
-    initialState=[]
+    initial_state=[]
     N=5
     K=5
     I=3
     for n in range(N):
         for k in range(K):
             for i in range(I):
-                saveNKAutomata(automata,enters,initialState,dataFolderPath,n,k)
+                save_n_k_automata(automata,enters,initial_state,data_folder_path,n,k)

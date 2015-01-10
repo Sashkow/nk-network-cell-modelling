@@ -4,30 +4,30 @@ import boolfunction
 import random
     
 
-def generateNKAutomata(N,K,functionsList,linksList):
+def generate_n_k_automata(N,K,functions_list,links_list):
   
-  generateFunctionsList(N,K,functionsList)
+  generate_functions_list(N,K,functions_list)
   
-  generateLinksList(N,K,linksList)
-  #generateState(initialState,N)
+  generate_links_list(N,K,links_list)
+  #generate_state(initial_state,N)
 
 
-def generateFunctionsList(N,K,functionsList):
+def generate_functions_list(N,K,functions_list):
   for i in range(N):
     #print "generating function", i
     bf=boolfunction.BoolFunction(K)
-    bf.generateRandom()
+    bf.generate_random()
     
-    functionsList.append(bf)
+    functions_list.append(bf)
     
-def generateLinksList(N,K,linksList):
+def generate_links_list(N,K,links_list):
   for n in range(N):
-    currentFunctionLinks=[]
-    while len(currentFunctionLinks)<K:
-      randValue=random.randrange(0,N)
-      if not (randValue in currentFunctionLinks):
-	currentFunctionLinks.append(randValue)
-    linksList.append(currentFunctionLinks)
+    current_function_links=[]
+    while len(current_function_links)<K:
+      rand_value=random.randrange(0,N)
+      if not (rand_value in current_function_links):
+	current_function_links.append(rand_value)
+    links_list.append(current_function_links)
     
     
 

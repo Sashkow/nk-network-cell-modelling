@@ -1,125 +1,125 @@
 import Automata
 import BoolFunction
 import AutomataProssesing
-### hasBasinLevelBijections testing begin
+### has_basin_level_bijections testing begin
 #returns two automatas with same basin sizes but different attractor sizes 
-def basinAttractorsDoNotMatchTriggerAutomatas():
+def basin_attractors_do_not_match_trigger_automatas():
     N=3
     K=3
     
-    functionsList1=[]
-    functionsList1.append(BoolFunction.BoolFunction(K,"00001111"))
-    functionsList1.append(BoolFunction.BoolFunction(K,"00000001"))
-    functionsList1.append(BoolFunction.BoolFunction(K,"00000000"))
+    functions_list1=[]
+    functions_list1.append(BoolFunction.BoolFunction(K,"00001111"))
+    functions_list1.append(BoolFunction.BoolFunction(K,"00000001"))
+    functions_list1.append(BoolFunction.BoolFunction(K,"00000000"))
     
-    linksList1=[[0,1,2],[0,1,2],[0,1,2]]
+    links_list1=[[0,1,2],[0,1,2],[0,1,2]]
     
     
-    automata1 = Automata.NK_Automata(N,K,functionsList1,linksList1)
+    automata1 = Automata.NK_Automata(N,K,functions_list1,links_list1)
     
-    AutomataProssesing.doAutomata(N,K,automata1)
+    AutomataProssesing.do_automata(N,K,automata1)
     
-    functionsList2=[]
-    functionsList2.append(BoolFunction.BoolFunction(K,"00001111"))
-    functionsList2.append(BoolFunction.BoolFunction(K,"01000110"))
-    functionsList2.append(BoolFunction.BoolFunction(K,"00001010"))
+    functions_list2=[]
+    functions_list2.append(BoolFunction.BoolFunction(K,"00001111"))
+    functions_list2.append(BoolFunction.BoolFunction(K,"01000110"))
+    functions_list2.append(BoolFunction.BoolFunction(K,"00001010"))
     
-    linksList2=[[0,1,2],[0,1,2],[0,1,2]]
+    links_list2=[[0,1,2],[0,1,2],[0,1,2]]
     
-    automata2 = Automata.NK_Automata(N,K,functionsList2,linksList2)
+    automata2 = Automata.NK_Automata(N,K,functions_list2,links_list2)
     
-    AutomataProssesing.doAutomata(N,K,automata2)
+    AutomataProssesing.do_automata(N,K,automata2)
     
     return automata1,automata2
 
-def basinAttractorOfCertainSizeIsAbsentTriggerAutomatas():
+def basin_attractor_of_certain_size_is_absent_trigger_automatas():
     N=3
     K=3
     
-    functionsList1=[]
-    functionsList1.append(BoolFunction.BoolFunction(K,"00001111"))
-    functionsList1.append(BoolFunction.BoolFunction(K,"00000001"))
-    functionsList1.append(BoolFunction.BoolFunction(K,"00000000"))
+    functions_list1=[]
+    functions_list1.append(BoolFunction.BoolFunction(K,"00001111"))
+    functions_list1.append(BoolFunction.BoolFunction(K,"00000001"))
+    functions_list1.append(BoolFunction.BoolFunction(K,"00000000"))
     
-    linksList1=[[0,1,2],[0,1,2],[0,1,2]]
+    links_list1=[[0,1,2],[0,1,2],[0,1,2]]
     
     
-    automata1 = Automata.NK_Automata(N,K,functionsList1,linksList1)
+    automata1 = Automata.NK_Automata(N,K,functions_list1,links_list1)
     
-    AutomataProssesing.doAutomata(N,K,automata1)
+    AutomataProssesing.do_automata(N,K,automata1)
     
-    functionsList2=[]
-    functionsList2.append(BoolFunction.BoolFunction(K,"00001111"))
-    functionsList2.append(BoolFunction.BoolFunction(K,"01000110"))
-    functionsList2.append(BoolFunction.BoolFunction(K,"10001010"))
+    functions_list2=[]
+    functions_list2.append(BoolFunction.BoolFunction(K,"00001111"))
+    functions_list2.append(BoolFunction.BoolFunction(K,"01000110"))
+    functions_list2.append(BoolFunction.BoolFunction(K,"10001010"))
     
-    linksList2=[[0,1,2],[0,1,2],[0,1,2]]
+    links_list2=[[0,1,2],[0,1,2],[0,1,2]]
     
-    automata2 = Automata.NK_Automata(N,K,functionsList2,linksList2)
+    automata2 = Automata.NK_Automata(N,K,functions_list2,links_list2)
     
-    AutomataProssesing.doAutomata(N,K,automata2)
+    AutomataProssesing.do_automata(N,K,automata2)
     
     return automata1,automata2
 
 #automatas of equal amount of basins and attractor and basin sizes but different structure.
-def bruteForceBeginningTriggerAutomatas():
+def brute_force_beginning_trigger_automatas():
     N=3
     K=3
     
-    functionsList1=[]
-    functionsList1.append(BoolFunction.BoolFunction(K,"00001111"))
-    functionsList1.append(BoolFunction.BoolFunction(K,"00000001"))
-    functionsList1.append(BoolFunction.BoolFunction(K,"00000000"))
+    functions_list1=[]
+    functions_list1.append(BoolFunction.BoolFunction(K,"00001111"))
+    functions_list1.append(BoolFunction.BoolFunction(K,"00000001"))
+    functions_list1.append(BoolFunction.BoolFunction(K,"00000000"))
     
-    linksList1=[[0,1,2],[0,1,2],[0,1,2]]
+    links_list1=[[0,1,2],[0,1,2],[0,1,2]]
     
     
-    automata1 = Automata.NK_Automata(N,K,functionsList1,linksList1)
+    automata1 = Automata.NK_Automata(N,K,functions_list1,links_list1)
     
-    AutomataProssesing.doAutomata(N,K,automata1)
+    AutomataProssesing.do_automata(N,K,automata1)
     
-    functionsList2=[]
-    functionsList2.append(BoolFunction.BoolFunction(K,"00001111"))
-    functionsList2.append(BoolFunction.BoolFunction(K,"01000110"))
-    functionsList2.append(BoolFunction.BoolFunction(K,"00000010"))
+    functions_list2=[]
+    functions_list2.append(BoolFunction.BoolFunction(K,"00001111"))
+    functions_list2.append(BoolFunction.BoolFunction(K,"01000110"))
+    functions_list2.append(BoolFunction.BoolFunction(K,"00000010"))
     
-    linksList2=[[0,1,2],[0,1,2],[0,1,2]]
+    links_list2=[[0,1,2],[0,1,2],[0,1,2]]
     
-    automata2 = Automata.NK_Automata(N,K,functionsList2,linksList2)
+    automata2 = Automata.NK_Automata(N,K,functions_list2,links_list2)
     
-    AutomataProssesing.doAutomata(N,K,automata2)
+    AutomataProssesing.do_automata(N,K,automata2)
     
     return automata1,automata2
 
-def bruteForceBeginningTriggerAfterSimpleBijectionTriggerAutomatas():
+def brute_force_beginning_trigger_after_simple_bijection_trigger_automatas():
     N=3
     K=3
     
-    functionsList1=[]
-    functionsList1.append(BoolFunction.BoolFunction(K,"00001110"))
-    functionsList1.append(BoolFunction.BoolFunction(K,"01000000"))
-    functionsList1.append(BoolFunction.BoolFunction(K,"00100000"))
+    functions_list1=[]
+    functions_list1.append(BoolFunction.BoolFunction(K,"00001110"))
+    functions_list1.append(BoolFunction.BoolFunction(K,"01000000"))
+    functions_list1.append(BoolFunction.BoolFunction(K,"00100000"))
     
-    linksList1=[[0,1,2],[0,1,2],[0,1,2]]
+    links_list1=[[0,1,2],[0,1,2],[0,1,2]]
      
-    automata1 = Automata.NK_Automata(N,K,functionsList1,linksList1)
+    automata1 = Automata.NK_Automata(N,K,functions_list1,links_list1)
     
-    AutomataProssesing.doAutomata(N,K,automata1)
+    AutomataProssesing.do_automata(N,K,automata1)
     
-    functionsList2=[]
-    functionsList2.append(BoolFunction.BoolFunction(K,"01001111"))
-    functionsList2.append(BoolFunction.BoolFunction(K,"00000100"))
-    functionsList2.append(BoolFunction.BoolFunction(K,"00000010"))
+    functions_list2=[]
+    functions_list2.append(BoolFunction.BoolFunction(K,"01001111"))
+    functions_list2.append(BoolFunction.BoolFunction(K,"00000100"))
+    functions_list2.append(BoolFunction.BoolFunction(K,"00000010"))
     
-    linksList2=[[0,1,2],[0,1,2],[0,1,2]]
+    links_list2=[[0,1,2],[0,1,2],[0,1,2]]
     
-    automata2 = Automata.NK_Automata(N,K,functionsList2,linksList2)
+    automata2 = Automata.NK_Automata(N,K,functions_list2,links_list2)
     
-    AutomataProssesing.doAutomata(N,K,automata2)
+    AutomataProssesing.do_automata(N,K,automata2)
     
     return automata1,automata2
 
-### hasBasinLevelBijections testing end
+### has_basin_level_bijections testing end
 def my_append(element,lst=[]):
     lst.append(element)
     return lst

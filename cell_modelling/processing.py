@@ -17,39 +17,39 @@ import saveload
 
 import os
    #N=4 K=2 8257536 
-def doAutomata(N,K,nkAutomata=None,ordinalNumber=-1):
-    drawGraphObject = DrawGraph()
+def do_automata(N,K,nk_automata=None,ordinal_number=-1):
+    draw_graph_object = DrawGraph()
 
-    currentFolderPath = os.path.dirname(__file__)
+    current_folder_path = os.path.dirname(__file__)
     
-    if nkAutomata == None:
-        nkAutomata = NK_Automata(N, K)
-        nkAutomata.generateRandomAutomata()
+    if nk_automata == None:
+        nk_automata = NK_Automata(N, K)
+        nk_automata.generate_random_automata()
     
-    nkAutomata.ordinalNumber = ordinalNumber
-    print nkAutomata
+    nk_automata.ordinal_number = ordinal_number
+    print nk_automata
     
-    nkAutomata.spanAutomata()
-    print "satespan",nkAutomata.stateSpan
+    nk_automata.span_automata()
+    print "satespan",nk_automata.state_span
     
-    nkAutomata.analyseAutomata()
-    print nkAutomata.stateList
+    nk_automata.analyse_automata()
+    print nk_automata.state_list
     
-    nkAutomata.makeAttractorStatDictionary()
-    print nkAutomata.attractorDict
+    nk_automata.make_attractor_stat_dictionary()
+    print nk_automata.attractor_dict
     
-    nkAutomata.countStability()
-    print "Stability:", nkAutomata.stability
+    nk_automata.count_stability()
+    print "Stability:", nk_automata.stability
     
-    nkAutomata.countExpectedReturnTime()
-    print "ExpectedReturnTime:", nkAutomata.expectedReturnTime
+    nk_automata.count_expected_return_time()
+    print "ExpectedReturnTime:", nk_automata.expected_return_time
 
-    drawGraphObject.drawGeneConnecionsGraph(nkAutomata.linksList, currentFolderPath)
+    draw_graph_object.draw_gene_connecions_graph(nk_automata.links_list, current_folder_path)
     
-    drawGraphObject.drawStatesGraph(nkAutomata.stateSpan, currentFolderPath)
+    draw_graph_object.draw_states_graph(nk_automata.state_span, current_folder_path)
 
-    drawGraphObject.drawSimplfiedStatesGraph(nkAutomata.attractorDict,2**nkAutomata.N,currentFolderPath)
+    draw_graph_object.draw_simplfied_states_graph(nk_automata.attractor_dict,2**nk_automata.N,current_folder_path)
 
     # print "saving..."
-    # saveload.saveNKAutomata(currentFolderPath, nkAutomata, True)
+    # saveload.save_n_k_automata(current_folder_path, nk_automata, True)
     # print "saved."

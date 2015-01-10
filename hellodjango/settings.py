@@ -72,9 +72,9 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
-USE_I18N = True
+USE_I18_n = True
 
-USE_L10N = True
+USE_L10_n = True
 
 USE_TZ = True
 

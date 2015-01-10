@@ -9,246 +9,246 @@ import drawgraph
 from debug import log
 from state import State
 
-#automataStructure
-#automataStates
-#automataAnalysis
+#automata_structure
+#automata_states
+#automata_analysis
 
 class NK_Automata(object):
     #static
-    graphNamesList = ['gene_links_graph','cell_states_graph','simplified_cell_states_graph']
+    graph_names_list = ['gene_links_graph','cell_states_graph','simplified_cell_states_graph']
     
-    def __init__(self,p_N=None,p_K=None,p_functionsList=None,p_linksList=None,p_viewStatesAsBinary=False):
-        if p_N==None or p_K==None:
+    def __init__(self,p__n=None,p__k=None,p_functions_list=None,p_links_list=None,p_view_states_as_binary=False):
+        if p__n==None or p__k==None:
             self.N=5
             self.K=5
         else:
-            self.N=p_N
-            self.K=p_K
+            self.N=p__n
+            self.K=p__k
 
-        if p_functionsList==None:
-            p_functionsList=[]
+        if p_functions_list==None:
+            p_functions_list=[]
         else:
-            self.functionsList= p_functionsList
+            self.functions_list= p_functions_list
 
-        if p_linksList==None:
-            self.linksList=[]
+        if p_links_list==None:
+            self.links_list=[]
         else:
-            self.linksList=p_linksList
+            self.links_list=p_links_list
 
-        self.ordinalNumber=-1
+        self.ordinal_number=-1
 
         
-        self.stateSpan={}              #stateSpan: {currentStateNumber: nextStateNumber,...}
-        self.stateList=[]           
-        self.attractorDict={}          #attractorDict {attractorNumber:[size,basinSize],...}
-        self.attractorStatesDict ={}   #attractorStatesDict: {attractorStateNumber:[nextAttractorStateNumber,attractorStateWeight],...} 
+        self.state_span={}              #state_span: {current_state_number: next_state_number,...}
+        self.state_list=[]           
+        self.attractor_dict={}          #attractor_dict {attractor_number:[size,basin_size],...}
+        self.attractor_states_dict ={}   #attractor_states_dict: {attractor_state_number:[next_attractor_state_number,attractor_state_weight],...} 
 
-        self.basinAmount=0
+        self.basin_amount=0
         self.stability=0
 
-        self.expectedReturnTime=100500
+        self.expected_return_time=100500
 
-        self.viewStatesAsBinary=p_viewStatesAsBinary
+        self.view_states_as_binary=p_view_states_as_binary
 
         
 
     def __sizeof__(self):
-        return sys.getsizeof(self.N) + sys.getsizeof(self.K) + sys.getsizeof(self.functionsList) + sys.getsizeof(self.linksList)+ sys.getsizeof(self.stateSpan)+ sys.getsizeof(self.basinAmount) + sys.getsizeof(self.stability)+ sys.getsizeof(self.attractorDict)
+        return sys.getsizeof(self.N) + sys.getsizeof(self.K) + sys.getsizeof(self.functions_list) + sys.getsizeof(self.links_list)+ sys.getsizeof(self.state_span)+ sys.getsizeof(self.basin_amount) + sys.getsizeof(self.stability)+ sys.getsizeof(self.attractor_dict)
 
     def __str__(self):
-        #return "N = " + str(self.N)+ " K = " + str(self.K) +"\n"+"functionsList: "+str(self.functionsList)+"\n"+"linksList: " + str(self.linksList)
-        return "N = " + str(self.N)+ " K = " + str(self.K) +"functionsList: "+str(self.functionsList)+"linksList: " + str(self.linksList)
+        #return "N = " + str(self.N)+ " K = " + str(self.K) +"\n"+"functions_list: "+str(self.functions_list)+"\n"+"links_list: " + str(self.links_list)
+        return "N = " + str(self.N)+ " K = " + str(self.K) +"functions_list: "+str(self.functions_list)+"links_list: " + str(self.links_list)
 
     def __repr__(self):
         return self.__str__()
 
-    def generateRandomAutomata(self):
-        self.functionsList=[]
-        self.linksList=[]
-        generate_automata.generateNKAutomata(self.N,self.K,self.functionsList,self.linksList)
+    def generate_random_automata(self):
+        self.functions_list=[]
+        self.links_list=[]
+        generate_automata.generate_n_k_automata(self.N,self.K,self.functions_list,self.links_list)
 
-    def stepAutomata(self,state):
+    def step_automata(self,state):
 
-        newStateString=""
-        for boolFunNumber in range(self.N):
+        new_state_string=""
+        for bool_fun_number in range(self.N):
 
-            boolFunInputs=""
-            for stateElementNumber in range(self.K):
-                boolFunInputs+=state.asString()[self.linksList[boolFunNumber][stateElementNumber]]
-
-
-            newStateString+=self.functionsList[boolFunNumber].evaluate(boolFunInputs)
-
-        return State(newStateString)
+            bool_fun_inputs=""
+            for state_element_number in range(self.K):
+                bool_fun_inputs+=state.as_string()[self.links_list[bool_fun_number][state_element_number]]
 
 
-    def spanAutomata(self):
-        if self.stateSpan:
-            self.stateSpan={}
+            new_state_string+=self.functions_list[bool_fun_number].evaluate(bool_fun_inputs)
+
+        return State(new_state_string)
+
+
+    def span_automata(self):
+        if self.state_span:
+            self.state_span={}
 
         #print "Iterating automata states:"
-        currentState=State(0,self.N)
-        nextState=State(0,self.N)
-        for stateNumber in range(2**self.N):
+        current_state=State(0,self.N)
+        next_state=State(0,self.N)
+        for state_number in range(2**self.N):
 
 
-            #print "Current state:", stateNumber
-            currentState.setState(stateNumber)
+            #print "Current state:", state_number
+            current_state.set_state(state_number)
 
-            nextState=self.stepAutomata(currentState)
+            next_state=self.step_automata(current_state)
 
-            if self.viewStatesAsBinary:
-                self.stateSpan[currentState.asString()[::]]=nextState.asString()[::]
+            if self.view_states_as_binary:
+                self.state_span[current_state.as_string()[::]]=next_state.as_string()[::]
             else:
-                self.stateSpan[currentState.asInt()]=nextState.asInt()
+                self.state_span[current_state.as_int()]=next_state.as_int()
             
 
-    def createStateList(self):
-        for stateNumber in range(2**self.N):
-            self.stateList.append(State(stateNumber,self.N))
+    def create_state_list(self):
+        for state_number in range(2**self.N):
+            self.state_list.append(State(state_number,self.N))
 #
-    def processSample(self,seed):
-        currentStateNumber=seed
-        sampleList=[]
-        while not (currentStateNumber in sampleList):
+    def process_sample(self,seed):
+        current_state_number=seed
+        sample_list=[]
+        while not (current_state_number in sample_list):
 
-            if self.stateList[currentStateNumber].inAttractor:
+            if self.state_list[current_state_number].in_attractor:
 
-                for sampleStateNumber in sampleList:
-                    self.stateList[sampleStateNumber].inBasin=True
-                    self.stateList[sampleStateNumber].basinNumber=self.stateList[currentStateNumber].basinNumber
-                    self.stateList[sampleStateNumber].firstAttractorStateNumber=currentStateNumber
-                self.stateList[currentStateNumber].weight+=len(sampleList)
+                for sample_state_number in sample_list:
+                    self.state_list[sample_state_number].in_basin=True
+                    self.state_list[sample_state_number].basin_number=self.state_list[current_state_number].basin_number
+                    self.state_list[sample_state_number].first_attractor_state_number=current_state_number
+                self.state_list[current_state_number].weight+=len(sample_list)
                 return
 
-            if self.stateList[currentStateNumber].inBasin:
-                firstAttractorStateNumber = self.stateList[currentStateNumber].firstAttractorStateNumber
-                for sampleStateNumber in sampleList:
-                    self.stateList[sampleStateNumber].inBasin=True
-                    self.stateList[sampleStateNumber].basinNumber=self.stateList[currentStateNumber].basinNumber
-                    self.stateList[sampleStateNumber].firstAttractorStateNumber=firstAttractorStateNumber
-                self.stateList[firstAttractorStateNumber].weight+=len(sampleList)
+            if self.state_list[current_state_number].in_basin:
+                first_attractor_state_number = self.state_list[current_state_number].first_attractor_state_number
+                for sample_state_number in sample_list:
+                    self.state_list[sample_state_number].in_basin=True
+                    self.state_list[sample_state_number].basin_number=self.state_list[current_state_number].basin_number
+                    self.state_list[sample_state_number].first_attractor_state_number=first_attractor_state_number
+                self.state_list[first_attractor_state_number].weight+=len(sample_list)
                 return
 
-            sampleList.append(currentStateNumber)
-            currentStateNumber=(self.stepAutomata(State(currentStateNumber,self.N))).asInt()
+            sample_list.append(current_state_number)
+            current_state_number=(self.step_automata(State(current_state_number,self.N))).as_int()
 
 
-        attractorStartStateNumber=currentStateNumber
+        attractor_start_state_number=current_state_number
 
-        attractorStartIndex=sampleList.index(attractorStartStateNumber)
-        basinList=sampleList[:attractorStartIndex]
-        attractorList=sampleList[attractorStartIndex:]
+        attractor_start_index=sample_list.index(attractor_start_state_number)
+        basin_list=sample_list[:attractor_start_index]
+        attractor_list=sample_list[attractor_start_index:]
 
-        for stateNumber in basinList:
-            self.stateList[stateNumber].inBasin=True
-            self.stateList[stateNumber].basinNumber=self.basinAmount+1
-            self.stateList[stateNumber].firstAttractorStateNumber=attractorStartStateNumber
+        for state_number in basin_list:
+            self.state_list[state_number].in_basin=True
+            self.state_list[state_number].basin_number=self.basin_amount+1
+            self.state_list[state_number].first_attractor_state_number=attractor_start_state_number
 
-        for stateNumber in attractorList:
-            self.stateList[stateNumber].inAttractor=True
-            self.stateList[stateNumber].basinNumber=self.basinAmount+1
+        for state_number in attractor_list:
+            self.state_list[state_number].in_attractor=True
+            self.state_list[state_number].basin_number=self.basin_amount+1
 
-        self.stateList[attractorStartStateNumber].weight=len(basinList)
+        self.state_list[attractor_start_state_number].weight=len(basin_list)
 
-        self.basinAmount+=1
+        self.basin_amount+=1
     ###
 
     #next state object
 
-    def nextState(self,state):
-        nextStateString=self.stateSpan[state.asString()]
-        nextStateNumber=State(nextStateString).stateNumber
-        nextStateObject=self.stateList[nextStateNumber]
-        return nextStateObject
+    def next_state(self,state):
+        next_state_string=self.state_span[state.as_string()]
+        next_state_number=State(next_state_string).state_number
+        next_state_object=self.state_list[next_state_number]
+        return next_state_object
     ###
 
-    def analyseAutomata(self):
+    def analyse_automata(self):
         #print "starting analysis:"
-        self.createStateList()
-        sampleNumber=0
-        for stateNumber in range(2**self.N):
-            if self.stateList[stateNumber].inBasin==False and self.stateList[stateNumber].inAttractor==False:
-                #print "  takingSample:", sampleNumber
-                self.processSample(stateNumber)
-            sampleNumber+=1
+        self.create_state_list()
+        sample_number=0
+        for state_number in range(2**self.N):
+            if self.state_list[state_number].in_basin==False and self.state_list[state_number].in_attractor==False:
+                #print "  taking_sample:", sample_number
+                self.process_sample(state_number)
+            sample_number+=1
 
-    def initializeAttractorDict(self):
-        for attractorNumber in range(1,self.basinAmount+1):
-            self.attractorDict[attractorNumber]=[0,0] # {attractorNumber:[size,basinSize],...}
+    def initialize_attractor_dict(self):
+        for attractor_number in range(1,self.basin_amount+1):
+            self.attractor_dict[attractor_number]=[0,0] # {attractor_number:[size,basin_size],...}
 
-    def makeAttractorStatDictionary(self):
+    def make_attractor_stat_dictionary(self):
         
-        self.initializeAttractorDict()
-        for state in self.stateList:
-            if state.inAttractor==True:
-                self.attractorDict[state.basinNumber][0]+=1
-            if state.inBasin==True:
-                self.attractorDict[state.basinNumber][1]+=1
+        self.initialize_attractor_dict()
+        for state in self.state_list:
+            if state.in_attractor==True:
+                self.attractor_dict[state.basin_number][0]+=1
+            if state.in_basin==True:
+                self.attractor_dict[state.basin_number][1]+=1
 
-    def countStability(self):
-        basinSizeSquareSum=0
-        for attractorNumber in self.attractorDict:
-            basinSizeSquareSum+=(self.attractorDict[attractorNumber][0]+self.attractorDict[attractorNumber][1])**2
-        self.stability=float(basinSizeSquareSum)/(2**(self.N))**2
+    def count_stability(self):
+        basin_size_square_sum=0
+        for attractor_number in self.attractor_dict:
+            basin_size_square_sum+=(self.attractor_dict[attractor_number][0]+self.attractor_dict[attractor_number][1])**2
+        self.stability=float(basin_size_square_sum)/(2**(self.N))**2
 
-    def distanceBetweenStates(self,fromState,toState):
+    def distance_between_states(self,from_state,to_state):
 
-        currentState=fromState
+        current_state=from_state
         distance = 0
-        while currentState!=toState:
+        while current_state!=to_state:
             distance+=1
-            currentState=self.nextState(currentState)
+            current_state=self.next_state(current_state)
 
-           # print "      CurrentState:", currentState
+           # print "      CurrentState:", current_state
             if distance>100500:
                 print "err"
                 return -1
-        #print "FromState:", fromState, "ToState:", toState, "distance:", distance
+        #print "FromState:", from_state, "ToState:", to_state, "distance:", distance
 
         return distance
 
 
-    def countExpectedReturnTime(self):
+    def count_expected_return_time(self):
         # average timesteps needed to reach some cycle in case of random state change i.e. average distance to the nearest cycle
-        averageReturnTime = 0
-        basinStatesAmount = 0
-        for currentState in self.stateList:
+        average_return_time = 0
+        basin_states_amount = 0
+        for current_state in self.state_list:
 
-            if currentState.inBasin==True:
-                basinStatesAmount+=1
-                firstAttractorState=self.stateList[currentState.firstAttractorStateNumber]
+            if current_state.in_basin==True:
+                basin_states_amount+=1
+                first_attractor_state=self.state_list[current_state.first_attractor_state_number]
 
-                averageReturnTime+=self.distanceBetweenStates(currentState,firstAttractorState)
-        if basinStatesAmount==0:
-            self.expectedReturnTime=0
+                average_return_time+=self.distance_between_states(current_state,first_attractor_state)
+        if basin_states_amount==0:
+            self.expected_return_time=0
             return 0
-        averageReturnTime=float(averageReturnTime)/basinStatesAmount
-        self.expectedReturnTime=averageReturnTime
-        return averageReturnTime
+        average_return_time=float(average_return_time)/basin_states_amount
+        self.expected_return_time=average_return_time
+        return average_return_time
 
 
     #outdated method. Never used
 
-    def makeAttractorStatesDictionary(self):
-        self.attractorStatesDict={}
-        for state in self.stateList:
-            if state.inAttractor==True:
-                if self.viewStatesAsBinary:
-                    self.attractorStatesDict[state.asString()]=[(self.stepAutomata(state)).asString(),state.weight]
+    def make_attractor_states_dictionary(self):
+        self.attractor_states_dict={}
+        for state in self.state_list:
+            if state.in_attractor==True:
+                if self.view_states_as_binary:
+                    self.attractor_states_dict[state.as_string()]=[(self.step_automata(state)).as_string(),state.weight]
                 else:
-                    self.attractorStatesDict[state.asInt()]=[(self.stepAutomata(state)).asInt(),state.weight]
+                    self.attractor_states_dict[state.as_int()]=[(self.step_automata(state)).as_int(),state.weight]
         
-    def fillAutomata(self):
+    def fill_automata(self):
 
-        self.generateRandomAutomata()
+        self.generate_random_automata()
         # print "automata", self
 
-        self.spanAutomata()
-        # print "satespan",self.stateSpan
+        self.span_automata()
+        # print "satespan",self.state_span
 
-        self.analyseAutomata()
-        # print self.stateList
+        self.analyse_automata()
+        # print self.state_list
 
-        self.makeAttractorStatesDictionary()
-        # print "attractor states:", self.attractorStatesDict
+        self.make_attractor_states_dictionary()
+        # print "attractor states:", self.attractor_states_dict

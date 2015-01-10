@@ -10,10 +10,10 @@ urlpatterns = patterns('',
     url(r'^$',views.index,name='index'),
     url(r'^(?P<N>[0-9]+)/(?P<K>[0-9]+)/$',views.index,name='index'),
     url(r'^build/$',views.build,name='build'),
-    url(r'^build_ajax/$',views.buildAjax,name='build-ajax'),
+    url(r'^build_ajax/$',views.build_ajax,name='build-ajax'),
     url(r'^message/$',views.message, name='message'),
-    url(r'^image/(?P<graph_name>[a-zA-z]+)/$', views.dynamic_image, name='dynamic-image'),    
-    url(r'^image/(?P<cell_id>[0-9]+)/(?P<graph_name>[a-zA-z]+)/$', views.dynamic_image_by_cell_id, name='dynamic-image-by-cell-id'),    
+    url(r'^image/(?P<graph_name>[a-z_a-z]+)/$', views.dynamic_image, name='dynamic-image'),    
+    url(r'^image/(?P<cell_id>[0-9]+)/(?P<graph_name>[a-z_a-z]+)/$', views.dynamic_image_by_cell_id, name='dynamic-image-by-cell-id'),    
     url(r'^like/$',views.like,name='like'),
-    url(r'^cells_top_list/$',views.showMostLikedCells,name='cells-top-list')
+    url(r'^cells_top_list/$',views.show_most_liked_cells,name='cells-top-list')
 )

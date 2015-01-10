@@ -20,9 +20,9 @@ pkgincludedir = $(includedir)/@PACKAGE@
 pkglibdir = $(libdir)/@PACKAGE@
 pkglibexecdir = $(libexecdir)/@PACKAGE@
 am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
-install_sh_DATA = $(install_sh) -c -m 644
-install_sh_PROGRAM = $(install_sh) -c
-install_sh_SCRIPT = $(install_sh) -c
+install_sh__d_a_t_a = $(install_sh) -c -m 644
+install_sh__p_r_o_g_r_a_m = $(install_sh) -c
+install_sh__s_c_r_i_p_t = $(install_sh) -c
 INSTALL_HEADER = $(INSTALL_DATA)
 transform = $(program_transform_name)
 NORMAL_INSTALL = :
@@ -32,7 +32,7 @@ NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
 subdir = src/cell_modelling
-DIST_COMMON = $(cell_modelling_PYTHON) $(srcdir)/Makefile.am \
+DIST_COMMON = $(cell_modelling__p_y_t_h_o_n) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
@@ -155,7 +155,7 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-cell_modelling_PYTHON = \
+cell_modelling__p_y_t_h_o_n = \
 	analyze.py \
 	attractor.py \
 	automata.py \
@@ -206,10 +206,10 @@ $(top_srcdir)/configure:  $(am__configure_deps)
 $(ACLOCAL_M4):  $(am__aclocal_m4_deps)
 	cd $(top_builddir) && $(MAKE) $(AM_MAKEFLAGS) am--refresh
 $(am__aclocal_m4_deps):
-install-cell_modellingPYTHON: $(cell_modelling_PYTHON)
+install-cell_modelling_p_y_t_h_o_n: $(cell_modelling__p_y_t_h_o_n)
 	@$(NORMAL_INSTALL)
 	test -z "$(cell_modellingdir)" || $(MKDIR_P) "$(DESTDIR)$(cell_modellingdir)"
-	@list='$(cell_modelling_PYTHON)'; dlist=; list2=; test -n "$(cell_modellingdir)" || list=; \
+	@list='$(cell_modelling__p_y_t_h_o_n)'; dlist=; list2=; test -n "$(cell_modellingdir)" || list=; \
 	for p in $$list; do \
 	  if test -f "$$p"; then b=; else b="$(srcdir)/"; fi; \
 	  if test -f $$b$$p; then \
@@ -228,9 +228,9 @@ install-cell_modellingPYTHON: $(cell_modelling_PYTHON)
 	                    --basedir "$(cell_modellingdir)" $$dlist; \
 	else :; fi
 
-uninstall-cell_modellingPYTHON:
+uninstall-cell_modelling_p_y_t_h_o_n:
 	@$(NORMAL_UNINSTALL)
-	@list='$(cell_modelling_PYTHON)'; test -n "$(cell_modellingdir)" || list=; \
+	@list='$(cell_modelling__p_y_t_h_o_n)'; test -n "$(cell_modellingdir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	test -n "$$files" || exit 0; \
 	dir='$(DESTDIR)$(cell_modellingdir)'; \
@@ -268,10 +268,10 @@ distdir: $(DISTFILES)
 	      find "$(distdir)/$$file" -type d ! -perm -700 -exec chmod u+rwx {} \;; \
 	    fi; \
 	    if test -d $(srcdir)/$$file && test $$d != $(srcdir); then \
-	      cp -fpR $(srcdir)/$$file "$(distdir)$$dir" || exit 1; \
+	      cp -fp_r $(srcdir)/$$file "$(distdir)$$dir" || exit 1; \
 	      find "$(distdir)/$$file" -type d ! -perm -700 -exec chmod u+rwx {} \;; \
 	    fi; \
-	    cp -fpR $$d/$$file "$(distdir)$$dir" || exit 1; \
+	    cp -fp_r $$d/$$file "$(distdir)$$dir" || exit 1; \
 	  else \
 	    test -f "$(distdir)/$$file" \
 	    || cp -p $$d/$$file "$(distdir)/$$file" \
@@ -297,11 +297,11 @@ installcheck: installcheck-am
 install-strip:
 	if test -z '$(STRIP)'; then \
 	  $(MAKE) $(AM_MAKEFLAGS) INSTALL_PROGRAM="$(INSTALL_STRIP_PROGRAM)" \
-	    install_sh_PROGRAM="$(INSTALL_STRIP_PROGRAM)" INSTALL_STRIP_FLAG=-s \
+	    install_sh__p_r_o_g_r_a_m="$(INSTALL_STRIP_PROGRAM)" INSTALL_STRIP_FLAG=-s \
 	      install; \
 	else \
 	  $(MAKE) $(AM_MAKEFLAGS) INSTALL_PROGRAM="$(INSTALL_STRIP_PROGRAM)" \
-	    install_sh_PROGRAM="$(INSTALL_STRIP_PROGRAM)" INSTALL_STRIP_FLAG=-s \
+	    install_sh__p_r_o_g_r_a_m="$(INSTALL_STRIP_PROGRAM)" INSTALL_STRIP_FLAG=-s \
 	    "INSTALL_PROGRAM_ENV=STRIPPROG='$(STRIP)'" install; \
 	fi
 mostlyclean-generic:
@@ -335,7 +335,7 @@ info: info-am
 
 info-am:
 
-install-data-am: install-cell_modellingPYTHON
+install-data-am: install-cell_modelling_p_y_t_h_o_n
 
 install-dvi: install-dvi-am
 
@@ -379,13 +379,13 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-cell_modellingPYTHON
+uninstall-am: uninstall-cell_modelling_p_y_t_h_o_n
 
 .MAKE: install-am install-strip
 
 .PHONY: all all-am check check-am clean clean-generic distclean \
 	distclean-generic distdir dvi dvi-am html html-am info info-am \
-	install install-am install-cell_modellingPYTHON install-data \
+	install install-am install-cell_modelling_p_y_t_h_o_n install-data \
 	install-data-am install-dvi install-dvi-am install-exec \
 	install-exec-am install-html install-html-am install-info \
 	install-info-am install-man install-pdf install-pdf-am \
@@ -393,7 +393,7 @@ uninstall-am: uninstall-cell_modellingPYTHON
 	installcheck-am installdirs maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-generic pdf \
 	pdf-am ps ps-am uninstall uninstall-am \
-	uninstall-cell_modellingPYTHON
+	uninstall-cell_modelling_p_y_t_h_o_n
 
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.

@@ -1,4 +1,4 @@
-cell_modelling_PYTHON = \
+cell_modelling__p_y_t_h_o_n = \
 	analyze.py \
 	attractor.py \
 	automata.py \
