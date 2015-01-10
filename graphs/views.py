@@ -23,7 +23,7 @@ import os
 import pickle
 
 global likesAmount
-likesAmount=0
+likesAmount = 0
 
 import random 
 
