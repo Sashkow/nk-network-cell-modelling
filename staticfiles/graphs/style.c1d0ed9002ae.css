@@ -1,0 +1,31 @@
+
+body{
+	width:1000px;
+	margin:0 auto;
+}
+
+.img_table{
+	width: 100%;
+	border: 1px;
+}
+
+.img_table td{
+	width: 33%;
+}
+
+.img_table img{
+	width: 100%;
+}
+
+.img_table div{
+	text-align: center;
+}
+
+.button_wrapper {
+    text-align: center;
+}
+
+.button {
+    position: absolute:
+    top: 50%;
+}

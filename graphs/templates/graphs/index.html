@@ -29,20 +29,20 @@
 	<tbody>
 		<tr>
 			<td class="img_table_cell">
-				<a href = "{{ gene_links_graph }}">
-					<img src="{{ gene_links_graph }}" alt="img1">
+				<a href = "{% url 'dynamic-image' 'gene_links_graph' %}">
+					<img src="{% url 'dynamic-image' 'gene_links_graph' %}" alt="img1">
 				</a>
 				<div>Genes' links network</div>
 			</td>
 			<td class="img_table_cell">
-				<a href = "{{cell_states_graph}}">
-					<img src="{{cell_states_graph}}" alt="img2">
+				<a href = "{% url 'dynamic-image' 'cell_states_graph' %}">
+					<img src="{% url 'dynamic-image' 'cell_states_graph' %}" alt="img2">
 				</a>
 				<div>Cell states graph</div>
 			</td>
 			<td class="img_table_cell">
-				<a href = "{{simplified_cell_states_graph}}">
-					<img src="{{simplified_cell_states_graph}}" alt="img3">
+				<a href = "{% url 'dynamic-image' 'simplified_cell_states_graph' %}">
+					<img src="{% url 'dynamic-image' 'simplified_cell_states_graph' %}" alt="img3">
 				</a>
 				<div>Simplified cell states graph (guess in what way)</div>
 			</td>
@@ -53,7 +53,7 @@
 	<div class="button_wrapper" >
 			<input id="like_button" class="button" type="submit" value="Like:)" style="display:inline" >
 			<div id="like_count" style="display: inline"> {{ likes }} </div>
-			<p><a href="{{cells_top_list_link}}">Liked cells top list</a></p>
+			<p><a href="{% url 'cells-top-list' %}">Liked cells top list</a></p>
 	</div>
 	
 
