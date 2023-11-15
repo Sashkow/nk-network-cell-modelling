@@ -15,7 +15,7 @@ import BoolFunction
 # not working correctly
 def throughAllCollocations(fromAmount,byAmount):
     # eg: throughAllCollocations(3,2)=[[1,2],[1,3],[2,1],[2,3]...]
-    elementsToCollocateList=range(fromAmount)
+    elementsToCollocateList=list(range(fromAmount))
     return throughAllCollocationsRecursive(elementsToCollocateList,byAmount)
     
 def throughAllCollocationsRecursive(elementsToCollocateList,byAmount):
@@ -27,7 +27,7 @@ def throughAllCollocationsRecursive(elementsToCollocateList,byAmount):
 	elementsToCollocateListWithoutItem=elementsToCollocateList[:]
 	del elementsToCollocateListWithoutItem[i]
 	recursiveList=throughAllCollocationsRecursive(elementsToCollocateListWithoutItem,byAmount-1)
-	print recursiveList
+	print(recursiveList)
 	
 	if len(recursiveList)==0:
 	    return [[item]]
@@ -86,7 +86,7 @@ def throughAllCombinations(fromAmount,byAmount):
     
     []
     """
-    elementsToCombineList=range(fromAmount)
+    elementsToCombineList=list(range(fromAmount))
     #currentCombination=[]
     reList=[]
     reList =throughAllCombinationsRecursive(elementsToCombineList,byAmount)
@@ -150,7 +150,7 @@ def throughAllCombinationsWithRepititions(fromAmount,byAmount):
     [2,3]  []
     """
     
-    elementsToCombineList=range(fromAmount)
+    elementsToCombineList=list(range(fromAmount))
     #currentCombination=[]
     reList=[]
     reList =throughAllCombinationsWithRepititionsRecursive(elementsToCombineList,byAmount)
@@ -201,7 +201,7 @@ def throughAllCombinationsWithRepititionsRecursive(elementsToCombineList,byAmoun
     
     
 def throughAllPermutations(permutationElementsAmount):
-    permutationElementsList=range(permutationElementsAmount)
+    permutationElementsList=list(range(permutationElementsAmount))
     return throughAllPermutationsRecursive(permutationElementsList)
   
 def throughAllPermutationsRecursive(permutationElementsList):
@@ -235,13 +235,13 @@ def throughAllAutomata(N,K):
 #LINKS    
     
 def showLinksLinksList(linksList,linksListList):
-    print "[",
+    print("[", end=' ')
     for currentLinksList in linksListList:
-	print "[",
+	print("[", end=' ')
 	for value in currentLinksList:
-	    print linksList[value], ",",
-	print "]",
-    print "]"
+	    print(linksList[value], ",", end=' ')
+	print("]", end=' ')
+    print("]")
 
 def throughAllLinks(N,K):
     linksList=throughAllCombinations(N,K)
@@ -278,7 +278,7 @@ def throughAllFunctions(N,K):
     Nvariable=N
     
     throughAllFunctionsRecursive(N,K,functionsList,Nvariable)
-    print summ
+    print(summ)
 
 def throughAllFunctionsRecursive(N,K,functionsList,Nvariable):
     global globalFunctionsAmount
@@ -300,7 +300,7 @@ def throughAllFunctionsRecursive(N,K,functionsList,Nvariable):
 		automataFunctionsList.append(automataFunction)
 	    
 	    
-	    print "Automata:",summ
+	    print("Automata:",summ)
 	    currentAutomata = NK_Automata(N,K,automataFunctionsList,linksList)
 	    AutomataProssesing.doAutomata(N,K,currentAutomata,summ)
 	    

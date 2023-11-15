@@ -1,8 +1,8 @@
-from django.conf.urls import patterns, include, url
-from django.contrib import admin
+from django.urls import re_path
 from signup import views
 
-urlpatterns = patterns('',
-    url(r'^$', views.get_name, name='get-name'),
-    url(r'^thanks/$', views.thanks, name='thanks')
-)
+
+urlpatterns = [
+    re_path(r"^$", views.get_name, name="get-name"),
+    re_path(r"^thanks/$", views.thanks, name="thanks"),
+]
