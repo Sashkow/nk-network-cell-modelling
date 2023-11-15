@@ -60,4 +60,4 @@ def do_automata(N, K, draw_graph_object, nk_automata=None, ordinal_number=-1):
 
     draw_graph_object.draw_states_graph(nk_automata.state_span, current_folder_path)
 
-    SaveLoad.save_n_k_automata(current_folder_path, nk_automata, True)
+    saveload.save_n_k_automata(current_folder_path, nk_automata, True)

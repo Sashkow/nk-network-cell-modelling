@@ -1,6 +1,5 @@
 from django.test import TestCase
 from django.test.client import RequestFactory
-from django.core.urlresolvers import reverse
 
 from django.apps import apps
 from django.apps import AppConfig
@@ -8,7 +7,7 @@ from django.apps import AppConfig
 from graphs.models import Cell, Like
 from django.contrib.auth.models import User
 
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 
 from django.http import HttpResponse, HttpResponseRedirect, HttpRequest
