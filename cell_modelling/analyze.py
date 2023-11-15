@@ -1,6 +1,7 @@
 from . import saveload
 from .proxyfunctions import *
 import os
+import math
 
 
 def count_averarage_stability_and_cycle_amount(automata_list):
@@ -88,8 +89,8 @@ def create_automata_stability_samples(
 ):
     automata_list = []
     print("gather_data:")
-    automata_type_folder_name = SaveLoad.generate_automata_type_folder_name(N, K)
-    SaveLoad.gather_data(
+    automata_type_folder_name = saveload.generate_automata_type_folder_name(N, K)
+    saveload.gather_data(
         automata_list,
         current_folder_path + "/" + "SavedAutomata" + "/" + automata_type_folder_name,
     )
@@ -114,8 +115,8 @@ def create_automata_return_time_samples(
 ):
     automata_list = []
     print("gather_data:")
-    automata_type_folder_name = SaveLoad.generate_automata_type_folder_name(N, K)
-    SaveLoad.gather_data(
+    automata_type_folder_name = saveload.generate_automata_type_folder_name(N, K)
+    saveload.gather_data(
         automata_list,
         current_folder_path + "/" + "SavedAutomata" + "/" + automata_type_folder_name,
     )
