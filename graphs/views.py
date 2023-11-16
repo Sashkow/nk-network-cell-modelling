@@ -35,7 +35,7 @@ from django.contrib.auth import authenticate
 from django.contrib import auth
 
 
-def index(request, N=5, K=5):  # todo remove defult value duplication
+def index(request, N=4, K=2):  # todo remove defult value duplication
     """
     A main view for graphs app. Renders a template with two sliders for N and K
     values respectively and three graph images.
@@ -71,7 +71,12 @@ def index(request, N=5, K=5):  # todo remove defult value duplication
     graph_names_list = getattr(nk_automata, 'graph_names_list', [])
 
     template_name = "graphs/index.html"
-    context = {"N": N, "K": K, "graph_names_list": graph_names_list}
+    context = {
+        "N": N, "K": K,
+        "graph_names_list": graph_names_list,
+        "functions": nk_automata.functions_list,
+        "links_list": nk_automata.links_list
+    }
 
     return render(request, template_name, context)
 
@@ -167,7 +172,7 @@ def dynamic_image(request, graph_name):
     if image == None:
         return HttpResponse("noimage")
 
-    image = adjust_svg(image)
+    #image = adjust_svg(image)
 
     return HttpResponse(image, content_type="image/svg+xml")
 
@@ -231,7 +236,7 @@ def get_current_automata(request):
     pickled_data = get_pickled_current_automata(request)
     
     try:
-        return pickle.loads(pickled_data)
+        return pickle.loads(eval(pickled_data))
     except Exception as e:
         print("Error during unpickling:", e)
         # Handle the error or print additional information for debugging
