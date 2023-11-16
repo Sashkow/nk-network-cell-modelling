@@ -1,16 +1,13 @@
-from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from django.urls import include, path
 
-urlpatterns = patterns('',
+urlpatterns = [
     # Examples:
-    # url(r'^$', 'hellodjango.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
-    url(r'^$',include('graphs.urls')),
-    url(r'^graphs/',include('graphs.urls')),
-    url(r'^signup/',include('signup.urls')),
-    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    url(r'^admin/', include(admin.site.urls)),
-
-
-    
-)
+    # path('', 'hellodjango.views.home', name='home'),
+    # path('blog/', include('blog.urls')),
+    path("", include("graphs.urls")),
+    path("graphs/", include("graphs.urls")),
+    path("signup/", include("signup.urls")),
+    path("admin/doc/", include("django.contrib.admindocs.urls")),
+    path("admin/", admin.site.urls),
+]
