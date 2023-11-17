@@ -28,11 +28,11 @@ class NK_Automata(object):
         p__k=None,
         p_functions_list=None,
         p_links_list=None,
-        p_view_states_as_binary=False,
+        p_view_states_as_binary=True,
     ):
         if p__n == None or p__k == None:
-            self.N = 5
-            self.K = 5
+            self.N = 4
+            self.K = 2
         else:
             self.N = p__n
             self.K = p__k
