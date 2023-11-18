@@ -14,6 +14,7 @@ from cell_modelling import drawgraph
 from graphs.models import Cell
 from graphs.models import Like
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
 
 import tempfile
 
@@ -54,9 +55,13 @@ def index(request, N=4, K=2):  # todo remove defult value duplication
 
     """
     user = request.user
+    password = os.environ.get("SUPERUSER_PASS", "admin")
     if not request.user.is_authenticated:
-        user = authenticate(username="admin", password="admin")
-        auth.login(request, user)
+        user = authenticate(request, username="admin", password=password)
+        if user is not None:
+            # If successful, log in the user
+            login(request, user)
+        # auth.login(request, user)
 
     nk_automata = get_current_automata(request)
     
