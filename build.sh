@@ -2,8 +2,8 @@
 # exit on error
 set -o errexit
 
-apt-get update
-apt-get install -y graphviz
+# apt-get update
+# apt-get install -y graphviz
 
 pip install -r requirements.txt
 
