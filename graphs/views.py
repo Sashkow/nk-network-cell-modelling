@@ -75,7 +75,7 @@ def index(request, N=4, K=2):  # todo remove defult value duplication
         # auth.login(request, user)
 
     nk_automata = get_current_automata(request)
-    
+
     if nk_automata is None or not hasattr(nk_automata, 'graph_names_list'):
         # Handle the case when nk_automata is None or doesn't have the expected attribute
         # This could involve creating a new automata or returning an error response
@@ -87,25 +87,15 @@ def index(request, N=4, K=2):  # todo remove defult value duplication
     graph_names_list = getattr(nk_automata, 'graph_names_list', [])
 
     combinations = generate_combinations(input_number=nk_automata.functions_list[0].K)
-
     result_dicts = []
 
-    for link_value in nk_automata.links_list:
-        result_dict = {}
+    for func in nk_automata.functions_list:
+        values_string = func.values_string
+        combinations_tuples = [tuple(combination) for combination in combinations]
+        result_dict = dict(zip(combinations_tuples, values_string))
+        result_dicts.append(result_dict)
 
-        for func in nk_automata.functions_list:
-            values_string = func.values_string
-            combinations_tuples = [tuple(combination) for combination in combinations]
-            result_dict[func] = dict(zip(combinations_tuples, values_string))
-
-        result_dicts.append({tuple(link_value): result_dict})
-
-    print(result_dicts)
-    # for func in nk_automata.functions_list:
-    #     values_string = func.values_string
-    #     combinations_tuples = [tuple(combination) for combination in combinations]
-    #     result_dict = dict(zip(combinations_tuples, values_string))
-    #     result_dicts.append(result_dict)
+    zipped_list = zip(nk_automata.links_list, result_dicts)
 
     template_name = "graphs/index.html"
     context = {
@@ -113,7 +103,7 @@ def index(request, N=4, K=2):  # todo remove defult value duplication
         "graph_names_list": graph_names_list,
         "functions": nk_automata.functions_list,
         "links_list": nk_automata.links_list,
-        "result_dicts": result_dicts,
+        "zipped_list": zipped_list,
     }
 
     return render(request, template_name, context)

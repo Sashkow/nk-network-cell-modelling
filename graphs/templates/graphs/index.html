@@ -50,84 +50,41 @@
 	</tbody>
 	</table>
 
-	<div class="button_wrapper" >
-			<input id="like_button" class="button" type="submit" value="Like:)" style="display:inline" >
-			<div id="like_count" style="display: inline"> {{ likes }} </div>
-			<p><a href="{% url 'cells-top-list' %}">Liked cells top list</a></p>
-	</div>
+<!--	<div class="button_wrapper" >-->
+<!--			<input id="like_button" class="button" type="submit" value="Like:)" style="display:inline" >-->
+<!--			<div id="like_count" style="display: inline"> {{ likes }} </div>-->
+<!--			<p><a href="{% url 'cells-top-list' %}">Liked cells top list</a></p>-->
+<!--	</div>-->
 	<div>
 		<p>{{ functions }}</p>
 		<p>{{ links_list }}</p>
 	</div>
-  <!-- <div class="tables">
-    <h2>Combinations Tables</h2>
-    <table style="border-collapse: collapse; width: 100%;">
-        <thead>
-            <tr>
-              <th style="border: 1px solid #868484; padding: 8px; text-align: left;">{{ links_list.0 }}</th>
-              <th style="border: 1px solid #868484; padding: 8px; text-align: left;"> f({{ links_list.0 }})</th>
-            </tr>
-        </thead>
-        <tbody>
-          {% for key, value in result_dict.items %}
-              <tr>
-                  <td style="border: 1px solid #868484; padding: 8px; text-align: left;">{{ key }}</td>
-                  <td style="border: 1px solid #868484; padding: 8px; text-align: left;">{{ value }}<br></td>
-              </tr>
-          {% endfor %}
-      </tbody>
-    </table>
-  </div> -->
-  <!-- <div class="tables">
+  <div class="tables">
     <h2>Combinations Tables</h2>
 
-    {% for result_dict in result_dicts %}
+    {% for item1, item2 in zipped_list %}
+
         <table style="border-collapse: collapse; width: 100%;">
             <thead>
                 <tr>
-                    <th style="border: 1px solid #868484; padding: 8px; text-align: left;">{{ links_list.0 }}</th>
-                    <th style="border: 1px solid #868484; padding: 8px; text-align: left;"> f({{ links_list.0 }})</th>
+                    <th style="border: 1px solid #868484; padding: 8px; text-align: left;">{{ item1 }}</th>
+                    <th style="border: 1px solid #868484; padding: 8px; text-align: left;"> f({{ item1 }})</th>
                 </tr>
             </thead>
             <tbody>
-                {% for combination, value in result_dict.items %}
+                {% for combination, value_func in item2.items %}
                     <tr>
                         <td style="border: 1px solid #868484; padding: 8px; text-align: left;">{{ combination }}</td>
-                        <td style="border: 1px solid #868484; padding: 8px; text-align: left;">{{ value }}<br></td>
+                        <td style="border: 1px solid #868484; padding: 8px; text-align: left;">{{ value_func }}<br></td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
         <br>
-    {% endfor %}
-  </div> -->
-  <div class="tables">
-    <h2>Combinations Tables</h2>
 
-    {% for link_dict in result_dicts %}
-        {% for link_key, inner_dict in link_dict.items %}
-            <table style="border-collapse: collapse; width: 100%;">
-                <thead>
-                    <tr>
-                        <th style="border: 1px solid #868484; padding: 8px; text-align: left;">{{ link_key }}</th>
-                        <th style="border: 1px solid #868484; padding: 8px; text-align: left;"> f({{ link_key }})</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for combination, value in inner_dict.items %}
-                        {% if forloop.first %}
-                            <tr>
-                                <td style="border: 1px solid #868484; padding: 8px; text-align: left;">{{ combination }}</td>
-                                <td style="border: 1px solid #868484; padding: 8px; text-align: left;">{{ value }}</td>
-                            </tr>
-                        {% endif %}
-                    {% endfor %}
-                </tbody>
-            </table>
-            <br>
-        {% endfor %}
-    {% endfor %}
-</div>
+  	{% endfor %}
+  </div>
+	<br>
 	<script>
 	</script>	
 </div>
