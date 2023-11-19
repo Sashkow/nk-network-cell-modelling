@@ -21,8 +21,11 @@ class DrawGraph(object):
 
     def gene_links_graph(self):
         A = AGraph()
+        duplicant_names = ["Hassan", "Ari", "Marie", "Ada", "Otto", "Jean", "Mae", "Ruby", "Leira", "Bubbles"]
+
         for i in range(len(self.automata.links_list)):
-            A.add_node(i, label="gene " + str(i))  # str(int(str(functions_list[i]),2)))
+
+            A.add_node(i, label=str(i) + str(duplicant_names[i]))  # str(int(str(functions_list[i]),2)))
 
         for bool_fun_number in range(len(self.automata.links_list)):
             for link in self.automata.links_list[bool_fun_number]:
