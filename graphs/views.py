@@ -14,6 +14,7 @@ from cell_modelling import drawgraph
 from graphs.models import Cell
 from graphs.models import Like
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
 
 import tempfile
 
@@ -33,6 +34,17 @@ import xml.etree.ElementTree as ET
 
 from django.contrib.auth import authenticate
 from django.contrib import auth
+
+def generate_combinations(input_number):
+    combinations = []
+
+    # Generate all possible combinations of 1s and 0s with the given input number
+    for i in range(2 ** input_number):
+        binary_str = bin(i)[2:].zfill(input_number)
+        combination = [int(digit) for digit in binary_str]
+        combinations.append(combination)
+
+    return combinations
 
 
 def index(request, N=4, K=2):  # todo remove defult value duplication
@@ -54,9 +66,13 @@ def index(request, N=4, K=2):  # todo remove defult value duplication
 
     """
     user = request.user
+    password = os.environ.get("SUPERUSER_PASS", "admin")
     if not request.user.is_authenticated:
-        user = authenticate(username="admin", password="admin")
-        auth.login(request, user)
+        user = authenticate(request, username="admin", password=password)
+        if user is not None:
+            # If successful, log in the user
+            login(request, user)
+        # auth.login(request, user)
 
     nk_automata = get_current_automata(request)
     
@@ -70,12 +86,34 @@ def index(request, N=4, K=2):  # todo remove defult value duplication
 
     graph_names_list = getattr(nk_automata, 'graph_names_list', [])
 
+    combinations = generate_combinations(input_number=nk_automata.functions_list[0].K)
+
+    result_dicts = []
+
+    for link_value in nk_automata.links_list:
+        result_dict = {}
+
+        for func in nk_automata.functions_list:
+            values_string = func.values_string
+            combinations_tuples = [tuple(combination) for combination in combinations]
+            result_dict[func] = dict(zip(combinations_tuples, values_string))
+
+        result_dicts.append({tuple(link_value): result_dict})
+
+    print(result_dicts)
+    # for func in nk_automata.functions_list:
+    #     values_string = func.values_string
+    #     combinations_tuples = [tuple(combination) for combination in combinations]
+    #     result_dict = dict(zip(combinations_tuples, values_string))
+    #     result_dicts.append(result_dict)
+
     template_name = "graphs/index.html"
     context = {
         "N": N, "K": K,
         "graph_names_list": graph_names_list,
         "functions": nk_automata.functions_list,
-        "links_list": nk_automata.links_list
+        "links_list": nk_automata.links_list,
+        "result_dicts": result_dicts,
     }
 
     return render(request, template_name, context)

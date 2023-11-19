@@ -8,6 +8,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
+import os
+import dj_database_url
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -18,13 +20,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "7=mf9y-)e$m)b52t0d#5e_tzur4fk2!o(86z$n8iwbbo2uk6%#"
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "7=mf9y-)e$m)b52t0d#5e_tzur4fk2!o(86z$n8iwbbo2uk6%#")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DJANGO_DEBUG", "") != "False"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1"]
 
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME: ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 # Application definition
 
@@ -85,6 +89,10 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+# print("DATABASE_URL:", os.environ.get("DATABASE_URL"))
+db_from_env = dj_database_url.config(default=os.environ.get("DATABASE_URL"))
+DATABASES["default"].update(db_from_env)
 
 FIXTURE_DIRS = "graphs/fixtures"
 # Internationalization
