@@ -99,7 +99,8 @@ def index(request, N=4, K=2):  # todo remove defult value duplication
 
     template_name = "graphs/index.html"
     context = {
-        "N": N, "K": K,
+        "N": nk_automata.N,
+        "K": nk_automata.K,
         "graph_names_list": graph_names_list,
         "functions": nk_automata.functions_list,
         "links_list": nk_automata.links_list,
