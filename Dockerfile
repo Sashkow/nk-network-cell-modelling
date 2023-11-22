@@ -25,3 +25,5 @@ RUN chown -R graph-user:graph-user /vol/
 RUN chmod -R 755 /vol/web/
 
 USER graph-user
+
+ENTRYPOINT [ "gunicorn", "hellodjango.wsgi" ]
