@@ -4,6 +4,8 @@
 from pygraphviz import *
 import os
 
+duplicant_names = ["Hassan", "Ari", "Marie", "Ada", "Otto", "Jean", "Mae", "Ruby", "Leira", "Bubbles"]
+
 
 class DrawGraph(object):
     def __init__(self, automata):
@@ -21,7 +23,6 @@ class DrawGraph(object):
 
     def gene_links_graph(self):
         A = AGraph()
-        duplicant_names = ["Hassan", "Ari", "Marie", "Ada", "Otto", "Jean", "Mae", "Ruby", "Leira", "Bubbles"]
 
         for i in range(len(self.automata.links_list)):
 

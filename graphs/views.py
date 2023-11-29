@@ -15,11 +15,14 @@ from graphs.models import Cell
 from graphs.models import Like
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
+from django.shortcuts import redirect
 
 import tempfile
 
 import os
 import pickle
+
+from cell_modelling.drawgraph import duplicant_names
 
 global likes_amount
 likes_amount = 0
@@ -97,18 +100,31 @@ def index(request, N=4, K=2):  # todo remove defult value duplication
 
     zipped_list = zip(nk_automata.links_list, result_dicts)
 
+    new_links_list = transform_number_list(nk_automata.links_list)
+
     template_name = "graphs/index.html"
     context = {
         "N": nk_automata.N,
         "K": nk_automata.K,
         "graph_names_list": graph_names_list,
         "functions": nk_automata.functions_list,
-        "links_list": nk_automata.links_list,
+        # "links_list": nk_automata.links_list,
+        "links_list": new_links_list,
         "zipped_list": zipped_list,
     }
 
     return render(request, template_name, context)
 
+def transform_number_list(num_list):
+    new_links_list = []
+    for link in num_list:
+        new_link = []
+        for num in link:
+            new_link.append(duplicant_names[num])
+        
+        new_links_list.append(new_link)
+    
+    return new_links_list
 
 def message(request):
     return HttpResponse("hello")
