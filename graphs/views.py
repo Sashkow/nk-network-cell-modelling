@@ -98,9 +98,11 @@ def index(request, N=4, K=2):  # todo remove defult value duplication
         result_dict = dict(zip(combinations_tuples, values_string))
         result_dicts.append(result_dict)
 
-    zipped_list = zip(nk_automata.links_list, result_dicts)
-
     new_links_list = transform_number_list(nk_automata.links_list)
+
+    zipped_list = zip(new_links_list, result_dicts)
+
+    
 
     template_name = "graphs/index.html"
     context = {
@@ -120,7 +122,7 @@ def transform_number_list(num_list):
     for link in num_list:
         new_link = []
         for num in link:
-            new_link.append(duplicant_names[num])
+            new_link.append(f"{num}{duplicant_names[num]}")
         
         new_links_list.append(new_link)
     

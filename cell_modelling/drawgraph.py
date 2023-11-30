@@ -4,7 +4,7 @@
 from pygraphviz import *
 import os
 
-duplicant_names = ["Hassan", "Ari", "Marie", "Ada", "Otto", "Jean", "Mae", "Ruby", "Leira", "Bubbles"]
+duplicant_names = ["Ari", "Bubbles", "Hassan", "Jean", "Lindsay", "Marie", "Nails", "Otto", "Ruby", "Turner"]
 
 
 class DrawGraph(object):
