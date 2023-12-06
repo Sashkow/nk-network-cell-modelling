@@ -14,6 +14,8 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
+RUN python manage.py collectstatic --noinput
+
 RUN mkdir -p /vol/web/media
 
 RUN adduser \
@@ -26,4 +28,4 @@ RUN chmod -R 755 /vol/web/
 
 USER graph-user
 
-ENTRYPOINT [ "gunicorn", "hellodjango.wsgi" ]
+CMD ["gunicorn", "hellodjango.wsgi:application", "--bind", "0.0.0.0:8000"]
